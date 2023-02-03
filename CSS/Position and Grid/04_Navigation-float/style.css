@@ -1,0 +1,87 @@
+body{
+    background-color: rgb(238, 238, 238);
+    padding: 10px 50px;
+    box-sizing: border-box;
+    font-family: Georgia, serif;
+    font-size: 1;
+}
+body>header{
+    border-bottom: 2px solid;
+}
+header p{
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-left: 0px;
+}
+header nav{
+    display: inline-block;
+    float: right;
+}
+header nav li{
+    display: inline-block;
+    list-style-type: none;
+    margin-left: 30px;
+    font-size: 18px;
+}
+a{
+    color: rgb(0, 102, 0);
+    text-decoration: none;
+}
+aside {
+    width: 20%;
+    float: right;
+}
+main article{
+width: 75%;
+}
+.first{
+    overflow:hidden;
+    font-size: 16px;
+}
+.first img{
+    width: 140px;
+    max-height: 200px;
+    float: right;
+    margin: 10px;
+    border: 1px solid;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 10px black;
+    object-fit: contain
+}
+blockquote{
+    display: inline-block;
+    width: 40%;
+    float: right;
+    border-left: 3px solid lightgray;
+    padding-left: 10px;
+    color: gray;
+    font-family: Georgia, serif;
+}
+blockquote>p:first-child{
+    margin-top: 0px
+}
+blockquote>p.name{
+    text-align: justify;  /* For Edge */
+    text-align-last: right;
+}
+.third img{
+    width: 150px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    border: 1px solid;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 10px black;
+    object-fit: contain
+}
+h1{
+font-family: Georgia, serif;
+font-size: 1.2;
+}
