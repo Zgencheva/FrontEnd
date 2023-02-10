@@ -1,0 +1,59 @@
+body{
+    background-color: rgb(238, 238, 238);
+   
+}
+.page{
+    margin: 20px 60px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+}
+header{
+    flex: 5 1 100%;
+    font-family: Georgia, serif;
+    text-transform: uppercase;
+    border-bottom: 2px solid black;
+}
+.content{
+    flex-basis: 79%;
+}
+.aside{
+    margin-right: 90px;
+}
+a{
+    color: rgb(0, 153, 0);
+}
+img{
+    width: 150px;   
+    max-height: 200px; 
+    border: 2px solid black;
+    padding: 10px;
+    margin: 1px 20px;
+    float: right;
+    background-color: rgb(255, 255, 255);
+    object-fit: cover;
+}
+p{
+    font-size: 18px;
+}
+section{
+    overflow: hidden;
+}
+.image2{
+    float: left;
+    margin-left: 0px;
+    max-height: 90px;
+}
+blockquote{
+    font-family: Georgia, serif;
+    line-height: 1.5;
+    font-style: italic;
+    float: right;
+    width: 40%;
+    border-left: 3px solid lightgrey;
+    padding-left: 10px;
+}
+blockquote>p{
+    margin-top: 20px;
+    float: right;
+}

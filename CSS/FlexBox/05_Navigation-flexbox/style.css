@@ -1,0 +1,25 @@
+body{
+    margin: 10px 40px;
+}
+header{
+    border-bottom: 2px solid rgb(0, 0, 0);
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+header>nav{
+    margin-right: auto;
+}
+header p{
+    text-transform: uppercase;
+    font-size: 20px;
+}
+header ul{
+    display: flex;
+    list-style: none;
+    gap: 24px
+}
+a{
+    text-decoration: none;
+    color: rgb(0, 153, 0);
+}
