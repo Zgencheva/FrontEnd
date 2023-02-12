@@ -1,0 +1,205 @@
+@import url(https://use.fontawesome.com/releases/v5.15.4/css/all.css);
+/* colors
+
+#070e27 - background
+#141e41 - light blue part comments etc
+#0059f7 - layout
+#657198 - dark text
+#7e8bb6 - grey
+*/
+html {
+    scroll-behavior: smooth;
+  }
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #070e27;
+    padding: 20px 64px;
+    color: white;
+}
+p{
+    color: #7e8bb6;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+header{
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    background-color: #070e27;
+    border-bottom: 2px solid #141e41;
+    position: sticky;
+    top: 0px;
+}
+/* Buttons */
+.btn{
+    border-radius: 4px;
+    border: none;
+    border-radius: 4px;
+    background-color: #0059f7;
+    color: #fff;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+.btn.btn-secondary{
+    background-color:#141e41;
+    text-transform: uppercase;
+}
+.navigation{
+    margin-left: auto;
+    margin-right: 20px;
+    letter-spacing: 1px;
+}
+.nav-list{
+    display: flex;
+    gap: 20px;
+}
+#hero{
+    margin-top: 42px;
+}
+#hero .welcome {
+    max-width: 900px;
+    margin: 0px auto 48px auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px
+  }
+  
+  #hero .welcome .title {
+    font-size: 48px;
+    line-height: 1.2;
+    width: 45%;
+  }
+  
+  #hero .welcome>div{
+    width: 45%;
+  }
+  #hero .welcome>div>p{
+    margin-bottom: 10px;
+  }
+  #hero .hero-img {
+    max-width: 900px;
+    margin: 0 auto 48px auto;
+  }
+  #hero .logos{
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 900px;
+    margin: 50px auto 48px auto;
+  }
+  #features{
+    margin: 0 200px 0 200px;
+    padding: 0 150px;
+  }
+  #features .features-info{
+    margin-bottom: 30px;
+  }
+  .grid-features{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+  }
+  .grid-item{
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px 30px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 20px;
+  }
+i{
+    font-size: 40px;
+}
+.features-trial{
+    margin-top: 30px;
+    width: 100%;
+    background-color: #0059f7;
+    text-align: center;
+    border-radius: 20px;
+    padding: 50px 0px;
+    line-height: 2;
+}
+.features-trial>button.btn{
+    background-color: #6c93d6;
+    border-radius: 10px;
+}
+#how{
+    padding: 0 150px;
+    margin-top: 48px;
+    text-align: center;
+}
+#how .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    gap: 48px;
+    margin-top: 48px;
+}
+#how .content img{
+    width: 60%;
+}
+#how .content .how-text{
+    padding: 10px 24px;
+    text-align: left;
+}
+#how .content:nth-child(even){
+    flex-direction: row-reverse;
+}
+
+#pricing{
+    margin-bottom: 48px;
+}
+
+#pricing>h2{
+    margin: 48px auto;
+    text-align: center;
+    letter-spacing: 1px;
+}
+#pricing .pricing-columns{
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;  
+    margin-top: 86px
+}
+#pricing .pricing-column{
+    padding: 10px 20px;
+    background-color: #091324;
+    border-radius: 8px;
+}
+#pricing .pricing-column button{
+    padding: 10px 20px;
+    background-color: #7e8bb6;
+    border-radius: 8px;
+    font-size: 12px;
+    color: white;
+    border: none;
+}
+#pricing .pricing-column:nth-child(even){
+    background-color: #0e1e39;
+    margin-bottom: 86px;
+}
+#pricing .pricing-column:nth-child(even) button{
+    background-color: #0059f7;
+}
+#pricing .pricing-amount{
+    border-bottom: 2px solid #1b2856;
+}
+#pricing .pricing-amount p:nth-child(2){
+    font-size: 28px;
+}
+#pricing .pricing-info{
+    padding:24px 0px 12px 24px;
+}
+#pricing .pricing-info ul li{
+    list-style: disc;
+    margin-bottom: 12px
+}
+#pricing .pricing-info ul li:last-child{
+    margin-bottom: 24px
+}

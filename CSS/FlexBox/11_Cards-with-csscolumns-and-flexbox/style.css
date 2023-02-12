@@ -1,0 +1,93 @@
+body{
+    background-color: rgb(238, 238, 238);
+    padding: 10px 300px;
+}
+.masonry{    
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "title title title"
+    "img1 img4 img7"
+    "img1 img4 img7"
+    "img1 img4 img7"
+    "img2 img4 img7"
+    "img2 img5 img7"
+    "img2 img5 img8"
+    "img3 img6 img8"
+    "img3 img6 img8"
+    "img3 img6 ."
+    "img3 img6 ."
+    "img3 . .";
+    gap: 12px;
+}
+.title{
+    grid-area: title;
+}
+.card{
+    display: block;
+    width: 250px;
+    border: 2px solid lightgray;
+    background-color: white;
+    box-shadow: 1px 1px 100px 1px #888888;
+
+}
+img{
+    width: 100%;
+}
+section{
+    margin: 5px 15px;
+}
+footer{
+    bottom: 5px;
+    margin: 5px 15px;
+    border-top: 2px solid lightgray;
+}
+.card1{
+    grid-area: img1;
+}
+
+.card2{
+    grid-area: img2;
+}
+
+.card3 {
+    grid-area: img3;
+}
+
+.card4 {
+    grid-area: img4;
+}
+
+.card5 {
+    grid-area: img5;
+}
+
+.card6 {
+    grid-area: img6;
+}
+
+.card7 {
+    grid-area: img7;
+
+}
+
+.card8 {
+    grid-area: img8;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+.title-flex{
+    flex-basis: 100%;
+}
+.card-flex{
+    width: 30%;   
+    width: 250px;
+    position: relative;
+    border: 2px solid lightgray;
+    background-color: white;
+    box-shadow: 1px 1px 100px 1px #888888;
+    height: auto;
+}
