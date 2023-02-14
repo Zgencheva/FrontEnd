@@ -2,7 +2,7 @@ body{
     margin: 10px 40px;
 }
 header{
-    border-bottom: 2px solid rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0,0,0);
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
