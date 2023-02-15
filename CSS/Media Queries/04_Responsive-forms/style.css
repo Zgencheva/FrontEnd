@@ -13,7 +13,8 @@ form{
     border-radius: 4px;
 }
 .sub-title{
-    display: inline-block;
+    font-size: 16px;
+    display: block;
     position: absolute;
     top: -15px;
     left: -2px;
@@ -25,13 +26,7 @@ form{
     justify-content: center;
     align-items: center;
     background-color: white;
-    padding: unset;
    
-}
-.sub-title p{
-    padding-left: 6px;
-    padding-top: 6px;
-    padding-bottom: 6px;
 }
 .username{
     margin-top: 30px;
@@ -54,3 +49,95 @@ input{
 }
 
 
+/* Laptop */
+@media screen and (max-width: 1400px) {
+	form{
+        width: 400px;
+        height: 200px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        position: relative;
+    }
+}
+
+/* tablet */
+@media screen and (max-width: 767px) {
+	form{
+        width: 400px;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        position: relative;
+    }
+.username{
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    margin-left: auto ;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.username input{
+    width: 250px;
+
+}
+.password{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto ;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.password input{
+    width: 250px;
+}
+}
+/* phone */
+@media screen and (max-width: 480px) {
+	form{
+        width: 400px;
+        height: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        position: relative;
+    }
+.username{
+    display: flex;
+    flex-direction: column;
+    
+    width: 100%;
+    margin-left: auto ;
+    margin-right: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.username input{
+    width: 100%;
+
+}
+.password{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: auto ;
+    margin-right: auto;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.password input{
+    width: 100%;
+}
+button{
+    margin: 10px 30px;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+}
+}
