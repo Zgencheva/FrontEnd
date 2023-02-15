@@ -1,0 +1,52 @@
+@font-face {
+    font-family: "Montserrat";
+    src: url("fonts/Montserrat-Regular.ttf")
+}
+@font-face {
+    font-family: "Poppins";
+    src: url("fonts/Poppins-Regular.ttf")
+}
+body{
+    font-family: Poppins;
+    color: rgb(88, 88, 88);
+}
+h1, h2, h3, h4, h5{
+    font-family: Montserrat;
+    color: rgb(15, 15, 15);
+    margin-bottom: 20px;
+}
+
+.wrapper{
+    max-width: 1260px;
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    gap: 40px;
+}
+.content{
+    width: 50%;
+}
+.picture{
+    width: 50%;
+}
+.info{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.info img{
+    width: 8%;
+    margin-right: 8px;
+}
+h4{
+    margin-bottom: 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.content>p{
+    margin-bottom: 20px;
+}
+ul li:first-child{
+    margin-top: 30px;
+}
