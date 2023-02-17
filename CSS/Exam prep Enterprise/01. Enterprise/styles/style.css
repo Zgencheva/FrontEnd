@@ -1,0 +1,68 @@
+@import url(./reset.css);
+:root{
+    ---clr-purple: hsl(244deg 100% 72%);
+    ---clr-background:#f6f8f9;
+    ---clr-title: hsl(214deg 24% 20%);
+}
+html{
+    font-family: Helvetica, sans-serif;
+}
+.wrapper{
+    max-width: 1200px;
+    margin: 3rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 6px;
+    background-color: var(---clr-background);
+    color: hsl(214deg 24% 20%);
+    padding: 2rem 4rem;
+    padding-bottom: 0px;
+    /* overflow: hidden; */
+}
+.wrapper .content{
+    width: 40%;
+}
+.wrapper .content .subtitle{
+    font-size: 12px;
+  margin-bottom: 16px;
+  font-weight: normal;
+}
+.wrapper .content .title{
+    padding-bottom: 2rem;
+    font-size: 34px;
+    font-weight: unset;
+}
+.wrapper .content .text{
+    font-size: 20px;
+    padding-bottom: 2rem;
+    color: rgb(142, 141, 141);
+}
+.btn{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    letter-spacing: 0.9px;
+    font-size: 18px;
+}
+.btn.btn-contact{
+   background-color: var(---clr-purple);
+   color: white;
+    border: 2px solid var(---clr-purple);
+    font-weight: 8px;
+    margin-right: 10px;
+}
+.btn.btn-learn{
+    border: 2px solid rgb(129, 121, 121);
+    font-weight: bold;
+    background-color: white;
+ }
+.picture{
+    width: 30%;
+    padding-top: 4rem;
+}
+.wrapper .image{
+    height: 100%;
+    width: 100%;
+    object-fit:cover;
+}
