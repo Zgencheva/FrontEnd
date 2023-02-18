@@ -1,0 +1,90 @@
+/* @import url(./reset.css); */
+:root {
+    --btn-color: #ae3c33;
+    --background-url: url(../images/background.png);
+    --form-background-url: url(../images/form-background.png);
+    --shadows: #888888;
+    --border-color: #cccccc;
+    --color: #5b5a5a;
+}
+*::before,
+*::after {
+    font-family: 'Mulish', sans-serif;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+body{
+    font-family: 'Mulish', sans-serif;
+    margin: 0;
+    background-image: var(--background-url);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.form-container{
+    width: 48%;
+    height: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: var(--form-background-url);
+    background-size: cover;
+    border-radius: 24px;
+    box-shadow: 20px 15px 15px var(--shadows);
+}
+form h2{
+    text-transform:uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    color: var(--color);
+    margin-left: 24px;
+}
+.inputGroup input{
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+}
+.inputGroup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.double{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+.double .inputGroup{
+    width: 46%;
+}
+label{
+    margin-bottom: 4px;
+    font-size: smaller;
+}
+.margin{
+    margin-bottom: 10px;
+}
+form button{
+    width: 40%;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+
+    background-color: var(--btn-color);
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 10px;
+}
