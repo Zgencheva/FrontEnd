@@ -160,7 +160,7 @@ body{
     justify-content: center;
  }
  .card.card-pictures .center-picture{
-   width: 600px;
+   max-width: 600px;
    height: 350px;
    /* z-index: 3; */
    position: absolute;
