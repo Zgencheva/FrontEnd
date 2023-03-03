@@ -52,29 +52,11 @@ export const UserSection = () => {
             CloseHandler();
         });
     };
-    const OnEditUserHandler = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            imageUrl,
-            ...address
-        } =Object.fromEntries(formData);
+    const OnEditUserHandler = async (userData) => {
 
-        const userData = {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            imageUrl,
-            address
-        }
         await userService.editUser(userAction.user._id, userData)
         .then(user=> {
-            setUsers(oldUsers => [...oldUsers, user])
+            setUsers(oldUsers => [...oldUsers.filter(x=> x._id != userAction.user._id), user])
             CloseHandler();
         });
     };
