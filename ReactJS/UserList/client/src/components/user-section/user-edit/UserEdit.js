@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-export const UserEdit = ({user, onClose, onEdit}) => {
+export const UserEdit = ({ user, onClose, onEdit }) => {
+    const [errors, setError] = useState({});
+    const [touched, setFormTouched] = useState(false);
     const [values, setValues] = useState({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -14,12 +16,13 @@ export const UserEdit = ({user, onClose, onEdit}) => {
     });
 
     const onValueChange = (e) => {
+        console.log(Object.values(errors))
         setValues(state => ({
             ...state,
             [e.target.name]: e.target.value,
         }));
-    } 
-    const submitHandler = (e)=> {
+    }
+    const submitHandler = (e) => {
         e.preventDefault();
         const {
             firstName,
@@ -28,7 +31,7 @@ export const UserEdit = ({user, onClose, onEdit}) => {
             phoneNumber,
             imageUrl,
             ...address
-        } =values;
+        } = values;
 
         const userData = {
             firstName,
@@ -39,6 +42,56 @@ export const UserEdit = ({user, onClose, onEdit}) => {
             address
         }
         onEdit(userData)
+    };
+    const onFocusEventHandler = () => {
+        setFormTouched(true);
+    }
+    const minLength = (e, minValue) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: e.target.value.length < minValue,
+                message: `${e.target.name} should be at least ${minValue} characters long`
+            },
+
+        }))
+    }
+    const validateEmail = (e) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: !(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)),
+                message: 'Invalid email'
+            },
+        }));
+    };
+    const validateImageUrl = (e) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: !(/^https?:\/\/.+/.test(e.target.value)),
+                message: 'Invalid image url'
+            },
+        }));
+    };
+    const validatePhoneNumber = (e) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: !(/^0[1-9]{1}[0-9]{8}$/.test(e.target.value)),
+                message: 'Phone number should start with 0 and should be 10 characters long!'
+            },
+        }));
+    };
+
+    const positiveNumberValidation  = (e) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: Number(e.target.value) <0,
+                message: 'Street number should be a positive number!'
+            },
+        }));
     };
     return (
         <div className="overlay">
@@ -62,21 +115,40 @@ export const UserEdit = ({user, onClose, onEdit}) => {
                                 <label htmlFor="firstName">First name</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-user"></i></span>
-                                    <input id="firstName" name="firstName" type="text" value={values.firstName} onChange={onValueChange}/>
+                                    <input 
+                                    id="firstName" 
+                                    name="firstName" 
+                                    type="text" 
+                                    value={values.firstName} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => minLength(e, 3)} 
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">
-                                    First name should be at least 3 characters long!
-                                </p>
+                                {errors.firstName?.isInvalid &&
+                                    <p className="form-error">
+                                        {errors.firstName?.message}
+                                    </p>
+                                }
+
                             </div>
                             <div className="form-group">
                                 <label htmlFor="lastName">Last name</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-user"></i></span>
-                                    <input id="lastName" name="lastName" type="text" value={values.lastName} onChange={onValueChange}/>
+                                    <input 
+                                    id="lastName" 
+                                    name="lastName" 
+                                    type="text" 
+                                    value={values.lastName} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => minLength(e, 3)}
+                                    onFocus={onFocusEventHandler} />
                                 </div>
-                                <p className="form-error">
-                                    Last name should be at least 3 characters long!
-                                </p>
+                                {errors.lastName?.isInvalid &&
+                                    <p className="form-error">
+                                        {errors.lastName?.message}
+                                    </p>
+                                }
                             </div>
                         </div>
 
@@ -85,17 +157,35 @@ export const UserEdit = ({user, onClose, onEdit}) => {
                                 <label htmlFor="email">Email</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-envelope"></i></span>
-                                    <input id="email" name="email" type="text" value={values.email} onChange={onValueChange}/>
+                                    <input 
+                                    id="email" 
+                                    name="email" 
+                                    type="text" 
+                                    value={values.email} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => validateEmail(e)} 
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">Email is not valid!</p>
+                                {errors.email?.isInvalid &&
+                                    <p className="form-error">{errors.email?.message}</p>
+                                }
                             </div>
                             <div className="form-group">
                                 <label htmlFor="phoneNumber">Phone number</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-phone"></i></span>
-                                    <input id="phoneNumber" name="phoneNumber" type="text" value={values.phoneNumber} onChange={onValueChange}/>
+                                    <input 
+                                    id="phoneNumber" 
+                                    name="phoneNumber" 
+                                    type="text" 
+                                    value={values.phoneNumber} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => validatePhoneNumber(e)} 
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">Phone number is not valid!</p>
+                                {errors.phoneNumber?.isInvalid &&
+                                    <p className="form-error">{errors.phoneNumber?.message}</p>
+                                }
                             </div>
                         </div>
 
@@ -103,9 +193,20 @@ export const UserEdit = ({user, onClose, onEdit}) => {
                             <label htmlFor="imageUrl">Image Url</label>
                             <div className="input-wrapper">
                                 <span><i className="fa-solid fa-image"></i></span>
-                                <input id="imageUrl" name="imageUrl" type="text" value={values.imageUrl} onChange={onValueChange}/>
+                                <input 
+                                id="imageUrl" 
+                                name="imageUrl" 
+                                type="text" 
+                                value={values.imageUrl} 
+                                onChange={onValueChange} 
+                                onBlur={(e) => validateImageUrl(e)} 
+                                onFocus={onFocusEventHandler}/>
                             </div>
-                            <p className="form-error">ImageUrl is not valid!</p>
+                            {
+                                errors.imageUrl?.isInvalid &&
+                                <p className="form-error">{errors.imageUrl?.message}</p>
+                            }
+
                         </div>
 
                         <div className="form-row">
@@ -113,21 +214,39 @@ export const UserEdit = ({user, onClose, onEdit}) => {
                                 <label htmlFor="country">Country</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-map"></i></span>
-                                    <input id="country" name="country" type="text" value={values.country} onChange={onValueChange}/>
+                                    <input 
+                                    id="country" 
+                                    name="country" 
+                                    type="text" 
+                                    value={values.country} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => minLength(e, 2)} 
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">
-                                    Country should be at least 2 characters long!
-                                </p>
+                                {errors.country?.isInvalid &&
+                                    <p className="form-error">
+                                        {errors.country?.message}
+                                    </p>
+                                }
                             </div>
                             <div className="form-group">
                                 <label htmlFor="city">City</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-city"></i></span>
-                                    <input id="city" name="city" type="text" value={values.city} onChange={onValueChange}/>
+                                    <input 
+                                    id="city" 
+                                    name="city" 
+                                    type="text" 
+                                    value={values.city} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => minLength(e, 3)}
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">
-                                    City should be at least 3 characters long!
-                                </p>
+                                {errors.city?.isInvalid &&
+                                    <p className="form-error">
+                                        {errors.city?.message}
+                                    </p>
+                                }
                             </div>
                         </div>
 
@@ -136,25 +255,43 @@ export const UserEdit = ({user, onClose, onEdit}) => {
                                 <label htmlFor="street">Street</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-map"></i></span>
-                                    <input id="street" name="street" type="text" value={values.street} onChange={onValueChange}/>
+                                    <input 
+                                    id="street" 
+                                    name="street" 
+                                    type="text" 
+                                    value={values.street}
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => minLength(e, 3)}
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">
-                                    Street should be at least 3 characters long!
-                                </p>
+                                {errors.street?.isInvalid &&
+                                    <p className="form-error">
+                                        {errors.street?.message}
+                                    </p>
+                                }
                             </div>
                             <div className="form-group">
                                 <label htmlFor="streetNumber">Street number</label>
                                 <div className="input-wrapper">
                                     <span><i className="fa-solid fa-house-chimney"></i></span>
-                                    <input id="streetNumber" name="streetNumber" type="text" value={values.streetNumber} onChange={onValueChange}/>
+                                    <input 
+                                    id="streetNumber" 
+                                    name="streetNumber" 
+                                    type="text" 
+                                    value={values.streetNumber} 
+                                    onChange={onValueChange} 
+                                    onBlur={(e) => positiveNumberValidation(e)}
+                                    onFocus={onFocusEventHandler}/>
                                 </div>
-                                <p className="form-error">
-                                    Street number should be a positive number!
-                                </p>
+                                {errors.streetNumber?.isInvalid &&
+                                    <p className="form-error">
+                                        {errors.streetNumber?.message}
+                                    </p>
+                                }
                             </div>
                         </div>
                         <div id="form-actions">
-                            <button id="action-save" className="btn" type="submit">Save</button>
+                            <button id="action-save" className="btn" type="submit" disabled={Object.values(errors).some(er=> er.isInvalid) || !touched}>Save</button>
                             <button id="action-cancel" className="btn" type="button" onClick={onClose}>
                                 Cancel
                             </button>
