@@ -3,11 +3,10 @@ import * as userService from '../../services/userService.js';
 
 import { User } from "./user-item/User.js";
 import { UserInfo } from "./user-info/UserInfo.js";
-import { UserEdit } from "./user-edit/UserEdit.js";
+import { UserAddorEdit } from "./user-add-edit/UserAddorEdit.js";
 import { UserDelete } from "./user-delete/UserDelete.js";
 import { UserActions } from './UserConstants.js';
 import { AddUserButton } from '../common/AddUserButton.js'
-import { UserAdd } from './user-add/UserAdd.js';
 
 export const UserSection = () => {
     const[users, setUsers] = useState([]);
@@ -26,26 +25,7 @@ export const UserSection = () => {
         });
 
     };
-    const OnCreateUserHandler = async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        const {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            imageUrl,
-            ...address
-        } =Object.fromEntries(formData);
-
-        const userData = {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            imageUrl,
-            address
-        }
+    const OnCreateUserHandler = async (userData) => {
         await userService.createUser(userData)
         .then(user=> {
             setUsers(oldUsers => [...oldUsers, user])
@@ -77,9 +57,9 @@ export const UserSection = () => {
             <div className="table-wrapper">
 
                 {userAction.action == UserActions.Info && <UserInfo user={userAction.user} onClose={CloseHandler} />}
-                {userAction.action == UserActions.Edit && <UserEdit user={userAction.user} onClose={CloseHandler} onEdit={OnEditUserHandler}/>}
+                {userAction.action == UserActions.Edit && <UserAddorEdit user={userAction.user} onClose={CloseHandler} onEdit={OnEditUserHandler} onCreate={OnCreateUserHandler}/>}
                 {userAction.action == UserActions.Delete && <UserDelete user={userAction.user} onClose={CloseHandler} onDelete={OnDeleteHandler}/>}
-                {userAction.action == UserActions.Add && <UserAdd onClose={CloseHandler} onCreate={OnCreateUserHandler}/>}
+                {userAction.action == UserActions.Add && <UserAddorEdit onClose={CloseHandler} onCreate={OnCreateUserHandler}/>}
 
                 <table className="table">
                     <thead>

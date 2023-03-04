@@ -1,5 +1,6 @@
 export const Search = () => {
     return (
+        
         <form className="search-form">
             <h2>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user"
