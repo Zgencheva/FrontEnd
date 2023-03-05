@@ -1,6 +1,7 @@
-export const Search = () => {
+import { SerchCriteria } from "./SearchConstants.js";
+export const Search = ({criteriaOptions}) => {
+    
     return (
-        
         <form className="search-form">
             <h2>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user"
@@ -26,12 +27,12 @@ export const Search = () => {
 
             <div className="filter">
                 <span>Search Criteria:</span>
-                <select name="criteria" className="criteria">
-                    <option>Not selected</option>
-                    <option>First Name</option>
-                    <option>Last Name</option>
-                    <option>Email</option>
-                    <option>Phone</option>
+                <select name="criteria" className="criteria" onChange={(e)=> criteriaOptions(e)}>
+                    <option value={SerchCriteria.notSelected}>Not selected</option>
+                    <option value={SerchCriteria.firstName}>First Name</option>
+                    <option value={SerchCriteria.lastName}>Last Name</option>
+                    <option value={SerchCriteria.email}>Email</option>
+                    <option value={SerchCriteria.phone}>Phone</option>
                 </select>
             </div>
         </form>

@@ -8,15 +8,20 @@ import { UserDelete } from "./user-delete/UserDelete.js";
 import { UserActions } from './UserConstants.js';
 import { AddUserButton } from '../common/AddUserButton.js'
 
-export const UserSection = () => {
+export const UserSection = ({criteria}) => {
+
     const[users, setUsers] = useState([]);
     const [userAction, setUserAction] = useState({ user: null, action: null });
-
+    const sortFunction = (a,b) => {
+        const criteriaName = criteria;
+        console.log(criteriaName);
+        // return b.criteriaName.localeCompare(a.criteriaName);
+    }
     useEffect(()=> {
         userService.getAll()
-            .then(users => setUsers(users));
+            .then(users => setUsers(users.sort((a,b)=> sortFunction(a,b))));
         }, []);
-
+        console.log(criteria);
     const ActionClickHandler = async (userId, actionType) => {
         const user = userId !=null ? await userService.getUser(userId) : null;
         setUserAction({
