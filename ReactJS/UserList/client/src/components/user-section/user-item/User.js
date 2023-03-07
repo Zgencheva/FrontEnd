@@ -14,7 +14,7 @@ export const User = ({
             <td>{user.lastName}</td>
             <td>{user.email}</td>
             <td>{user.phoneNumber}</td>
-            <td>{user.createdAt}</td>
+            <td>{new Date(user.createdAt).toLocaleDateString()}</td>
 
             <td className="actions">
                 <button className="btn edit-btn" title="Edit" onClick={()=> onActionClick(user._id, UserActions.Edit)}>
