@@ -1,21 +1,21 @@
 import styles from './Hero.module.css';
 
 export const Hero = () => (
-    <div className="bg">
-        <div className="text-center page-header">
-            <h1 className="display-4">Welcome to Visit<span className="feature-icon"><i className="fa fa-mountain"></i></span>City</h1>
-            <h2>
+    <div className={`bg ${styles.bg}`}>
+        <div className={`text-center page-header ${styles.pageHeader} `}>
+            <h1 className="display-4" style={{color: 'white'}}>Welcome to Visit<span className="feature-icon"><i className="fa fa-mountain"></i></span>City</h1>
+            <h2 style={{color: 'white'}}>
                 Create Your Personal Travel Guide
-                <a>Here</a>
+                <a> Here</a>
             </h2>
             <br />
-            <h3 className="display-12">Where are you travelling to?</h3>
+            <h3 className="display-12" style={{color: 'white'}}>Where are you travelling to?</h3>
         </div>
-        <form className="col-md-6 offset-md-3">
-            <div className="form-group col-md-6 offset-md-3">
+        <form className={`col-md-6 offset-md-3 ${styles.formStyle}`}>
+            <div className={`form-group col-md-6 offset-md-3 ${styles.input}`}>
                 <input name="cityName" className="form-control" placeholder="City" />
             </div>
-            <fieldset className="col-md-6 offset-md-4">
+            <fieldset className={`col-md-6 offset-md-4 ${styles.fieldsetStyle}`}>
                 <div className="form-check" style={{color: 'white'}}>
                     <input className="form-check-input" type="radio" name="radioOption" id="exampleRadios1" defaultValue="Attractions" defaultChecked />
                         <label className="form-check-label" htmlFor="exampleRadios1">
@@ -29,21 +29,21 @@ export const Hero = () => (
                         </label>
                     </div>
             </fieldset>
-            <button type="submit" className="btn btn-primary col-md-3 offset-md-4">Search</button>
+            <button type="submit" className={`btn btn-primary col-md-3 offset-md-4`}>Search</button>
         </form>
-        <div classes={`h-10 d-inline-block ${styles['container']}`}>
-            <div className="row align-items-center">
-                <div className="col-sm">
+        <div classes="h-10 d-inline-block">
+            <div className="row align-items-center" style={{color: 'white'}}>
+                <div className={`col-sm ${styles.colsm}`}>
                     <div className="feature-icon">
                         <i className="fa fa-city"></i> <span>0 Cities</span>
                     </div>
                 </div>
-                <div className="col-sm">
+                <div className={`col-sm ${styles.colsm}`}>
                     <div className="feature-icon">
                         <i className="fa fa-eye"></i> <span>0 Attractions</span>
                     </div>
                 </div>
-                <div className="col-sm">
+                <div className={`col-sm ${styles.colsm}`}>
                     <div className="feature-icon">
                         <i className="fa fa-utensils"></i> <span>0 Restaurants</span>
                     </div>

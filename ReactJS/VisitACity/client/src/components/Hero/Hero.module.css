@@ -1,4 +1,27 @@
-.container {
-    position:absolute;
-    background-color: whitesmoke;
+.pageHeader{
+    padding-top: 80px;
+    padding-bottom: 20px;
+}
+div .bg {
+    background-image: url('../../../public/castle-5116436_960_720.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80vh;
+
+}
+.colorWhite {
+    color: white,
+}
+.colsm{
+    text-align: center;
+    color: white;
+}
+.formStyle{
+    margin-bottom: 20px;
+}
+.input{
+    padding-bottom: 10px;
+}
+.fieldsetStyle{
+    margin-bottom: 20px;
 }
