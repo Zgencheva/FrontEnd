@@ -1,0 +1,45 @@
+import styles from './Attraction.module.css';
+
+export const Attraction = ({ attraction }) => {
+    const imagePath = `images/attractions/${attraction.image._id}.${attraction.image.extension}`;
+    return (
+        <div className={`media col-md-4 ${styles.card}`}>
+            <a asp-controller="Attraction" asp-action="Details" asp-route-id="@Model.Id">
+                <img className="mr-3 img-responsive" width="100%" height="300" src={process.env.PUBLIC_URL + imagePath} alt="attraction image"/>
+            </a>
+            <div className={`card-body`}>
+                <h4 className="card-title text-center">{attraction.name}</h4>
+                <p></p>
+                <h5 className="card-text text-center">{attraction.city.name}</h5>
+                <div className={`card-text feature-icon ${styles.cardBody}`}>
+                    <i className="fa fa-dollar-sign"></i> <span>Price: {attraction.price}</span>
+                </div>
+                <div className={`card-text feature-icon ${styles.cardBody}`}>
+                    <i className="fa fa-search-location"></i> <span>Address: {attraction.address}</span>
+                </div>
+                <p></p>
+
+            </div>
+            <div className={`card-footer ${styles.cardFooter}`}>
+                <div className={`card-text feature-icon ${styles.cardBody}`}>
+                    <i className="fa fa-eye"></i>
+
+                    {attraction.userReviews.length == 1 &&
+                        <span>Revied by 1 adventurer</span>
+                    }
+                    {attraction.userReviews.length != 1 &&
+                        <span>Revied by {attraction.userReviews.length} adventurers</span>
+                    }
+                </div>
+            </div>
+            <div className="text-center">
+                <a className="btn btn-info">
+                    <div className="feature-icon">
+                        <i className="fa fa-info-circle"></i> <span>Details</span>
+                    </div>
+                </a>
+            </div>
+            <p></p>
+        </div>
+    );
+}
