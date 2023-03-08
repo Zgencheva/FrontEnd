@@ -2,7 +2,8 @@
     padding-top: 80px;
     padding-bottom: 20px;
 }
-div .bg {
+.bg {
+    position: relative;
     background-image: url('../../../public/castle-5116436_960_720.jpg');
     background-repeat: no-repeat;
     background-size: cover;
@@ -26,4 +27,9 @@ div .bg {
 }
 .fieldsetStyle{
     margin-bottom: 20px;
+}
+.footer{
+    background-color: black;
+    position: absolute;
+    bottom: 0px;
 }
