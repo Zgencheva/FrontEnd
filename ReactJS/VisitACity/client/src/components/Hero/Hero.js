@@ -1,6 +1,6 @@
 import styles from './Hero.module.css';
 
-export const Hero = () => (
+export const Hero = ({statistics}) => (
     <div className={`bg ${styles.bg}`}>
         <div className={`text-center page-header ${styles.pageHeader} `}>
             <h1 className="display-4" style={{color: 'white'}}>Welcome to Visit<span className="feature-icon"><i className="fa fa-mountain"></i></span>City</h1>
@@ -35,12 +35,12 @@ export const Hero = () => (
             <div className="row align-items-center" style={{color: 'white'}}>
                 <div className={`col-sm ${styles.colsm}`}>
                     <div className="feature-icon">
-                        <i className="fa fa-city"></i> <span>0 Cities</span>
+                        <i className="fa fa-city"></i> <span>{statistics.cities} Cities</span>
                     </div>
                 </div>
                 <div className={`col-sm ${styles.colsm}`}>
                     <div className="feature-icon">
-                        <i className="fa fa-eye"></i> <span>0 Attractions</span>
+                        <i className="fa fa-eye"></i> <span>{statistics.attractions} Attractions</span>
                     </div>
                 </div>
                 <div className={`col-sm ${styles.colsm}`}>
