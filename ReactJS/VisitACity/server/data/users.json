@@ -1,0 +1,8 @@
+{
+    "user_admin":{
+        "_id": "efb8eea7-350b-4c19-8698-766196b21a30",
+        "email": "admin@abv.bg",
+        "password": "admin123",
+        "role": "admin"
+    }
+}
