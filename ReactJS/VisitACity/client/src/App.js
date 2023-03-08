@@ -1,5 +1,5 @@
-import { Hero } from './components/Hero/Hero.js';
-import { Navigation } from './components/Navigation/Navigation.js'
+import { Hero } from './components/hero/Hero.js';
+import { Navigation } from './components/navigation/Navigation.js'
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
 
         </div>
       </main>
+      <footer></footer>
     </div>
   );
 }
