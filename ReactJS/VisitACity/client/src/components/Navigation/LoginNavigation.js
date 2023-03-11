@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Admin } from "./Admin.js"
 
 export const LoginNavigation = ({ user }) => {
@@ -6,7 +7,7 @@ export const LoginNavigation = ({ user }) => {
             {user != null &&
                 <>
                     <li className="nav-item">
-                        <a className="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello, user!</a>
+                        <a className="nav-link text-dark" title="Manage">Hello, user!</a>
                     </li>
                     {user?.role == 'Admin' && <Admin />}
                     <li className="nav-item">
@@ -16,10 +17,10 @@ export const LoginNavigation = ({ user }) => {
             }
             {user == null &&
                 <> <li className="nav-item">
-                    <a className="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    <Link className="nav-link text-dark" to="/register">Register</Link>
                 </li>
                     <li className="nav-item">
-                        <a className="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        <Link className="nav-link text-dark" to="login">Login</Link>
                     </li>
                 </>
             }

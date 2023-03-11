@@ -1,12 +1,13 @@
+import { Link } from 'react-router-dom';
 import styles from './Attraction.module.css';
 
 export const Attraction = ({ attraction }) => {
     const imagePath = `images/attractions/${attraction.image._id}.${attraction.image.extension}`;
     return (
         <div className={`media col-md-4 ${styles.card}`}>
-            <a asp-controller="Attraction" asp-action="Details" asp-route-id="@Model.Id">
+            <Link to={`/attractions/${attraction._id}`}>
                 <img className="mr-3 img-responsive" width="100%" height="300" src={process.env.PUBLIC_URL + imagePath} alt="attraction image"/>
-            </a>
+            </Link>
             <div className={`card-body`}>
                 <h4 className="card-title text-center">{attraction.name}</h4>
                 <p></p>
@@ -33,11 +34,9 @@ export const Attraction = ({ attraction }) => {
                 </div>
             </div>
             <div className="text-center">
-                <a className="btn btn-info">
-                    <div className="feature-icon">
-                        <i className="fa fa-info-circle"></i> <span>Details</span>
-                    </div>
-                </a>
+                <Link to={`/attractions/${attraction._id}`} className={`btn btn-info ${styles['btn-info']}`}>
+                    <i className="fa fa-info-circle"></i> <span>Details</span>
+                </Link>
             </div>
             <p></p>
         </div>
