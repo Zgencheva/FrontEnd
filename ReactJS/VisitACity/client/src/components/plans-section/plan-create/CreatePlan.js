@@ -6,8 +6,16 @@ export const CreatePlan = (userId) => {
     let today = GetDate();
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
-    const [toDatestate, setTodate] = useState(today);
-    const [errors, setError] = useState({});
+    const [errors, setError] = useState({
+        fromDate: {
+            isInvalid: false,
+            message: `Start date cannot be in the past.`,
+        },
+        toDate: {
+            isInvalid: false,
+            message: `To date cannot be before start date.`,
+        }
+    });
     const [values, setValues] = useState({
         country: '',
         city: '',
@@ -17,8 +25,9 @@ export const CreatePlan = (userId) => {
     const onValueChange = (e) => {
         setValues(state => ({
             ...state,
-            [e.target.name]: [e.target.name] == 'toDate' ? setTodate(e.target.value) : e.target.value,
+            [e.target.name]: e.target.value,
         }));
+        console.log(values);
     };
     useEffect(() => {
         countryService.getAll()
@@ -30,8 +39,29 @@ export const CreatePlan = (userId) => {
         setCities(countries.filter(c => c._id == id)[0].cities);
     };
 
+    const validateFromDate = (e) => {
+        console.log(e.target.value < GetDate(new Date()));
+        setError(state=> ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: e.target.value < GetDate(new Date()),
+                message: `Start date cannot be in the past.`
+            },
+        }));
+    }
+
+    const validateToDate = (e) => {
+        setError(state=> ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: e.target.value < values.fromDate,
+                message: `To date cannot be before start date.`
+            }
+        }))
+    }
+
     return (
-        <form method="post" className={`col-md-6 offset-md-3 ${styles['form-createPlan']}`}>
+        <form  className={`col-md-6 offset-md-3 ${styles['form-createPlan']}`}>
             <h2>Where are you travelling to?</h2>
             <div className="form-group">
                 <label className="form-label">Country</label>
@@ -67,8 +97,11 @@ export const CreatePlan = (userId) => {
                     name="fromDate"
                     value={values.fromDate}
                     onChange={onValueChange}
-                    onBlur={(e) => setTodate(e.target.value)} />
-                <span className="text-danger"></span>
+                    onBlur={(e)=> validateFromDate(e)} />
+                    {errors.fromDate?.isInvalid &&
+                    <span className="text-danger">{errors.fromDate?.message}</span>
+                    }
+                
             </div>
             <label className="form-label" htmlFor="toDate">To date</label>
             <div className="form-group">
@@ -77,9 +110,12 @@ export const CreatePlan = (userId) => {
                     name="toDate"
                     type="date"
                     className="form-control"
-                    value={toDatestate}
-                    onChange={onValueChange} />
-                <span className="text-danger"></span>
+                    value={values.toDate}
+                    onChange={onValueChange}
+                    onBlur={(e)=> validateToDate(e)}/>
+                 {errors.toDate?.isInvalid &&
+                    <span className="text-danger">{errors.toDate?.message}</span>
+                    }
             </div>
             <p></p>
             <button type="submit" className="btn btn-primary">Create your plan</button>
