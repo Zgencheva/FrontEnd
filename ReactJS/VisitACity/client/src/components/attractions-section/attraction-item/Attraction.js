@@ -7,7 +7,7 @@ export const Attraction = ({ attraction }) => {
         <div className={`media col-md-4 ${styles.card}`}>
             <Link to={`/attractions/${attraction._id}`}>
                 <img className="mr-3 img-responsive" width="100%" height="300" src={process.env.PUBLIC_URL + imagePath} alt="attraction image"/>
-            </Link>
+                </Link>
             <div className={`card-body`}>
                 <h4 className="card-title text-center">{attraction.name}</h4>
                 <p></p>
