@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
 
 export const Hero = ({ statistics }) => {
@@ -24,8 +25,8 @@ export const Hero = ({ statistics }) => {
         <div className={`text-center page-header ${styles.pageHeader} `}>
             <h1 className="display-4" style={{ color: 'white' }}>Welcome to Visit<span className="feature-icon"><i className="fa fa-mountain"></i></span>City</h1>
             <h2 style={{ color: 'white' }}>
-                Create Your Personal Travel Guide
-                <a> Here</a>
+                Create Your Personal Travel Guide 
+                <Link to="/createPlan">Here</Link>
             </h2>
             <br />
             <h3 className="display-12" style={{ color: 'white' }}>Where are you travelling to?</h3>

@@ -2,13 +2,13 @@
     "country_1": {
         "_id": 1,
         "name": "Bulgaria",
-        "cities": [{"_id": 1, "name": "Sofia"}, 
-                    {"_id": 2, "name": "Plovdiv"},
-                    {"_id": 3, "name": "Varna"},
-                    {"_id": 4, "name": "Tryavna"},
-                    {"_id": 5, "name": "Hisarya"},
-                    {"_id": 6, "name": "Velingrad"},
-                    {"_id": 7, "name": "Burgas"}]
+        "cities": [{"_id": 101, "name": "Sofia"}, 
+                    {"_id": 102, "name": "Plovdiv"},
+                    {"_id": 103, "name": "Varna"},
+                    {"_id": 104, "name": "Tryavna"},
+                    {"_id": 105, "name": "Hisarya"},
+                    {"_id": 106, "name": "Velingrad"},
+                    {"_id": 107, "name": "Burgas"}]
     },
     "country_2": {
         "_id": 2,

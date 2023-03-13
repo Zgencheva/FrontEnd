@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import styles from './CreatePlan.module.css';
+import { GetDate } from '../../../helpers/getDate.js';
+import { CreateGUID } from '../../../helpers/newGuid.js';
 import * as countryService from '../../../services/countriesService.js'
+import * as userService from '../../../services/userService.js';
 
 export const CreatePlan = (userId) => {
+    userId = "efb8eea7-350b-4c19-8698-766196b21a30";
     let today = GetDate();
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
@@ -17,8 +21,6 @@ export const CreatePlan = (userId) => {
         }
     });
     const [values, setValues] = useState({
-        country: '',
-        city: '',
         fromDate: today,
         toDate: today,
     });
@@ -27,7 +29,6 @@ export const CreatePlan = (userId) => {
             ...state,
             [e.target.name]: e.target.value,
         }));
-        console.log(values);
     };
     useEffect(() => {
         countryService.getAll()
@@ -36,11 +37,10 @@ export const CreatePlan = (userId) => {
 
     const renderCities = (e) => {
         let id = e.target.value;
-        setCities(countries.filter(c => c._id == id)[0].cities);
+        setCities(countries.filter(c => c.name == id)[0].cities);
     };
 
     const validateFromDate = (e) => {
-        console.log(e.target.value < GetDate(new Date()));
         setError(state=> ({
             ...state,
             [e.target.name]: {
@@ -60,19 +60,44 @@ export const CreatePlan = (userId) => {
         }))
     }
 
+    const submitHandler = async (e) => {
+        e.preventDefault();
+        var data = ({
+            ...values,
+            userId,
+            attractions: [],
+            restaurants: [],
+            _id: CreateGUID(),
+        })
+        const user = await userService.getById(userId);
+        if(user.plans.some(x=> x.city == data.city)){
+            setError(state => ({
+                ...state,
+                submit: {
+                    isInvalid: true,
+                    message: `You already have plans in ${data.city}"`
+                }
+            }))
+            return;
+        }
+        user.plans.push(data);
+        await userService.addPlanToUser(user);
+        console.log(user);        
+    }
+
     return (
-        <form  className={`col-md-6 offset-md-3 ${styles['form-createPlan']}`}>
+        <form  onSubmit={submitHandler} className={`col-md-6 offset-md-3 ${styles['form-createPlan']}`}>
             <h2>Where are you travelling to?</h2>
             <div className="form-group">
                 <label className="form-label">Country</label>
                 <select
                     id="CountryList"
-                    name="CountryId"
+                    name="country"
                     className="form-control"
                     onChange={onValueChange}
                     onBlur={(e) => renderCities(e)}>
                     <option value={values.country}>Select country</option>
-                    {countries.map(c => <option key={c._id} value={c._id}>{c.name}</option>)}
+                    {countries.map(c => <option key={c._id} value={c.name}>{c.name}</option>)}
                 </select>
                 <span className="text-danger"></span>
             </div>
@@ -80,11 +105,11 @@ export const CreatePlan = (userId) => {
                 <label className="form-label">City</label>
                 <select
                     id="CityList"
-                    name="CityId"
+                    name="city"
                     className="form-control"
                     onChange={onValueChange}>
                     <option value={values.city}>Select city</option>
-                    {cities.map(s => <option key={s._id} value={s._id}>{s.name}</option>)}
+                    {cities.map(s => <option key={s._id} value={s.name}>{s.name}</option>)}
                 </select>
                 <span className="text-danger"></span>
             </div>
@@ -119,17 +144,10 @@ export const CreatePlan = (userId) => {
             </div>
             <p></p>
             <button type="submit" className="btn btn-primary">Create your plan</button>
+            <br/>
+            {errors.submit?.isInvalid &&
+                    <span className="text-danger">{errors.submit?.message}</span>
+                    }
         </form>
     );
-}
-
-export const GetDate = () => {
-    let today = new Date();
-    let dd = today.getDate();
-    let mm = today.getMonth() + 1;
-    const yyyy = today.getFullYear();
-    if (dd < 10) { dd = `0${dd}`; };
-    if (mm < 10) { mm = `0${mm}`; };
-    today = `${yyyy}-${mm}-${dd}`;
-    return today;
 }
