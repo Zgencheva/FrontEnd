@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AttractionsList } from '../attractions-section/attractions-list/AttractionsList.js';
 import styles from './Home.module.css';
-import { Hero } from '../hero/Hero.js';
+import { Hero } from './hero/Hero.js';
 import * as attractionService from '../../services/attractionService.js';
 import * as citiesService from '../../services/citiesService.js';
 
