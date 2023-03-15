@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as attractionService from '../../../services/attractionService.js';
 import styles from './AttractionDetails.module.css';
@@ -11,13 +11,10 @@ export const AttractionDetails = ({ user }) => {
         attractionService.getById(attractionId)
             .then(att => {
                 setAttraction(att);
-                console.log(att);
-
             });
     }, [attractionId]);
-    console.log(attraction?._id);
 
-    const imagePath = `../../images/attractions/${attraction?.image?._id}.${attraction?.image?.extension}`;
+    const imagePath = `../../images/attractions/${attraction?.image}`;
     return (
         <section className={`${styles.wrapper}`}>
             <div className={`${styles.content}`}>
@@ -53,7 +50,7 @@ export const AttractionDetails = ({ user }) => {
                         <button className="btn btn-success"><i className="fa fa-bus"></i>Add to plan</button>
                     </li>
                     <li className={`${styles['btn-edit']}`}>
-                        <button className="btn btn-outline-dark"><i className="fa-solid fa-pen"></i>Edit</button>
+                        <Link className="btn btn-outline-dark" to={`/admin/attractions/edit/${attractionId}`}><i className="fa-solid fa-pen"></i>Edit</Link>
                     </li>
                     <li className={`${styles['btn-edit']}`}>
                         <button className='btn btn-outline-danger'><i className="fa-solid fa-trash"></i>Delete</button>

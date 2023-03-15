@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './CreatePlan.module.css';
 import { GetDate } from '../../../helpers/getDate.js';
 import { CreateGUID } from '../../../helpers/newGuid.js';
-import * as countryService from '../../../services/countriesService.js'
 import * as userService from '../../../services/userService.js';
+import {routes} from '../../../constants/routes.js'
 
-export const CreatePlan = (userId) => {
-    userId = "efb8eea7-350b-4c19-8698-766196b21a30";
+export const CreatePlan = ({countries}) => {
+    const navigate = useNavigate();
+   let userId = "efb8eea7-350b-4c19-8698-766196b21a30";
     let today = GetDate();
-    const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
     const [errors, setError] = useState({
         fromDate: {
@@ -30,11 +31,6 @@ export const CreatePlan = (userId) => {
             [e.target.name]: e.target.value,
         }));
     };
-    useEffect(() => {
-        countryService.getAll()
-            .then(c => setCountries(Object.values(c)));
-    }, []);
-
     const renderCities = (e) => {
         let id = e.target.value;
         setCities(countries.filter(c => c.name == id)[0].cities);
@@ -82,7 +78,7 @@ export const CreatePlan = (userId) => {
         }
         user.plans.push(data);
         await userService.addPlanToUser(user);
-        console.log(user);        
+        navigate(routes.myPlans)     
     }
 
     return (

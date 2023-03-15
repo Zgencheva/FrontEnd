@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styles from './Attraction.module.css';
 
 export const Attraction = ({ attraction }) => {
-    const imagePath = `images/attractions/${attraction.image._id}.${attraction.image.extension}`;
+    const imagePath = `images/attractions/${attraction.image}`;
     return (
         <div className={`media col-md-4 ${styles.card}`}>
             <Link to={`/attractions/${attraction._id}`}>

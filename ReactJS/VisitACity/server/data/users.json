@@ -9,8 +9,8 @@
         "plans": [
             {
                 "_id": "ff67cf74-3050-4257-9f8f-11537222dde2",
-                "cityId": 1,
-                "countryId": 100,
+                "city": "Sofia",
+                "country": "Bylgaria",
                 "fromDate": "2022-03-18",
                 "toDate": "2022-03-19",
                 "attractions": [],
