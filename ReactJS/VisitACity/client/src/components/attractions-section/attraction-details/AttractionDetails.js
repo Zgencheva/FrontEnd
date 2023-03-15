@@ -14,7 +14,6 @@ export const AttractionDetails = ({ user }) => {
             });
     }, [attractionId]);
 
-    const imagePath = `../../images/attractions/${attraction?.image}`;
     return (
         <section className={`${styles.wrapper}`}>
             <div className={`${styles.content}`}>
@@ -58,7 +57,7 @@ export const AttractionDetails = ({ user }) => {
                 </ul>
             </div>
             <div className={styles['picture-wrapper']}>
-                <img className={`${styles.picture}`} src={process.env.PUBLIC_URL + imagePath} alt="attraction image" />
+                <img className={`${styles.picture}`} src={attraction.image} alt="attraction image" />
             </div>
         </section>
     );

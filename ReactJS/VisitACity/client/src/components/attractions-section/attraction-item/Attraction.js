@@ -2,11 +2,10 @@ import { Link } from 'react-router-dom';
 import styles from './Attraction.module.css';
 
 export const Attraction = ({ attraction }) => {
-    const imagePath = `images/attractions/${attraction.image}`;
     return (
         <div className={`media col-md-4 ${styles.card}`}>
             <Link to={`/attractions/${attraction._id}`}>
-                <img className="mr-3 img-responsive" width="100%" height="300" src={process.env.PUBLIC_URL + imagePath} alt="attraction image"/>
+                <img className="mr-3 img-responsive" width="100%" height="300" src={attraction.image} alt="attraction image"/>
                 </Link>
             <div className={`card-body`}>
                 <h4 className="card-title text-center">{attraction.name}</h4>
