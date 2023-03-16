@@ -16,7 +16,18 @@ import * as countryService from './services/countriesService.js';
 
 function App() {
   const [countries, setCountries] = useState([]);
+  const [user, setUser] = useState([]);
 
+  const onSubmitRegister = async (values) => {
+    //register user,
+    //save user to state
+    console.log(values);
+  }
+  const onSubmitLogin = async (values) => {
+    //register user,
+    //save user to state
+    console.log(values);
+  }
   useEffect(() => {
     countryService.getAll()
         .then(c => setCountries(Object.values(c)));
@@ -35,8 +46,8 @@ function App() {
           <Route path={routes['plan-details']} element={<PlanDetails />} />
           <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries}/>}/>
 
-          <Route path={routes.login} element={<Login />} />
-          <Route path={routes.register} element={<Register />} />
+          <Route path={routes.login} element={<Login onSubmitLogin={onSubmitLogin}/>} />
+          <Route path={routes.register} element={<Register onSubmitRegister={onSubmitRegister}/>} />
         </Routes>
       </main>
       <Footer />

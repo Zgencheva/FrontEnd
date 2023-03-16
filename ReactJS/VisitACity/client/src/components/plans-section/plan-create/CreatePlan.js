@@ -1,15 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CreatePlan.module.css';
 import { GetDate } from '../../../helpers/getDate.js';
 import { CreateGUID } from '../../../helpers/newGuid.js';
 import * as userService from '../../../services/userService.js';
 import {routes} from '../../../constants/routes.js'
+import { useForm } from '../../../hooks/useForm.js';
 
 export const CreatePlan = ({countries}) => {
-    const navigate = useNavigate();
    let userId = "efb8eea7-350b-4c19-8698-766196b21a30";
-    let today = GetDate();
+    const {values, onValueChange} = useForm({
+        fromDate: GetDate(),
+        toDate: GetDate(),
+    })
+    const navigate = useNavigate();
     const [cities, setCities] = useState([]);
     const [errors, setError] = useState({
         fromDate: {
@@ -21,16 +25,7 @@ export const CreatePlan = ({countries}) => {
             message: `To date cannot be before start date.`,
         }
     });
-    const [values, setValues] = useState({
-        fromDate: today,
-        toDate: today,
-    });
-    const onValueChange = (e) => {
-        setValues(state => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
-    };
+
     const renderCities = (e) => {
         let id = e.target.value;
         setCities(countries.filter(c => c.name == id)[0].cities);
