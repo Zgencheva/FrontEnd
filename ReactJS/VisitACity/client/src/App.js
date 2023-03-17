@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/header/Header.js';
 import { Home } from './components/home/Home.js';
@@ -13,45 +14,62 @@ import { routes } from './constants/routes.js';
 import styles from './App.module.css';
 import { AttractionEdit } from './components/admin-section/attractions/attraction-edit/AttractionEdit.js';
 import * as countryService from './services/countriesService.js';
+import { AuthContext } from './contexts/AuthContext.js';
+import * as auth from './services/authServices.js';
 
 function App() {
+  const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
 
-  const onSubmitRegister = async (values) => {
-    //register user,
-    //save user to state
-    console.log(values);
+  const onUserRegister = async (values) => {
+    try {
+      var user = await auth.register(values);
+      console.log(user);
+      setUser(user);
+      navigate(routes.home)     
+    } catch (error) {
+      console.log(error.message)
+    }
   }
-  const onSubmitLogin = async (values) => {
-    //register user,
-    //save user to state
-    console.log(values);
+  const onUserLogin = async (values) => {
+    try {
+      var user = await auth.login(values);
+      var userDetails = await auth.getUser();
+      console.log(userDetails);
+      setUser(user);
+      console.log(user);
+      navigate(routes.home)     
+    } catch (error) {
+      console.log(error.message);
+    }
   }
   useEffect(() => {
     countryService.getAll()
-        .then(c => setCountries(Object.values(c)));
-}, []);
+      .then(c => setCountries(Object.values(c)));
+  }, []);
 
   return (
-    <div className="App">
-      <Header />
+    <AuthContext.Provider value={{user}}>
+      <div className="App">
+        <Header />
 
-      <main>
-        <Routes>
-          <Route path={routes.home} element={<Home />} />
-          <Route path={routes.myPlans} element={<MyPlans />} />
-          <Route path={routes.createPlan} element={<CreatePlan countries={countries}/>} />
-          <Route path={routes['attraction-details']} element={<AttractionDetails />} />
-          <Route path={routes['plan-details']} element={<PlanDetails />} />
-          <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries}/>}/>
+        <main>
+          <Routes>
+            <Route path={routes.home} element={<Home />} />
+            <Route path={routes.myPlans} element={<MyPlans />} />
+            <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />
+            <Route path={routes['attraction-details']} element={<AttractionDetails />} />
+            <Route path={routes['plan-details']} element={<PlanDetails />} />
+            <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
 
-          <Route path={routes.login} element={<Login onSubmitLogin={onSubmitLogin}/>} />
-          <Route path={routes.register} element={<Register onSubmitRegister={onSubmitRegister}/>} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+            <Route path={routes.login} element={<Login onSubmitLogin={onUserLogin} />} />
+            <Route path={routes.register} element={<Register onSubmitRegister={onUserRegister} />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </AuthContext.Provider>
   );
 }
 

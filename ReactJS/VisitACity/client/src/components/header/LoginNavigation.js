@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
-import { Admin } from "./Admin.js"
+import { Admin } from "./Admin.js";
+import {
+    AuthContext
+} from "../../contexts/AuthContext.js";
+import { useContext } from "react";
 
-export const LoginNavigation = ({ user }) => {
+export const LoginNavigation = () => {
+
+    const user = useContext(AuthContext);
+
     return (
         <ul className="navbar-nav">
             {user != null &&

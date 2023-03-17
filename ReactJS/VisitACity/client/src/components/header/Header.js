@@ -1,8 +1,12 @@
 import { LoginNavigation } from "./LoginNavigation.js";
 import { Link } from 'react-router-dom';
-import { Admin } from "./Admin.js";
+import {
+    AuthContext
+} from "../../contexts/AuthContext.js";
+import { useContext } from "react";
 
 export const Header = () => {
+    const { user } = useContext(AuthContext);
     return (
         <header className="App-header">
             <div className="navbar navbar-expand-sm navbar-dark bg-primary fixed-top border-bottom box-shadow mb-3">
@@ -21,9 +25,11 @@ export const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link text-dark" to="/createPlan">Create Plan</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-dark" to="/myPlans">My plans</Link>
-                            </li>
+                            {user &&
+                                <li className="nav-item">
+                                    <Link className="nav-link text-dark" to="/myPlans">My plans</Link>
+                                </li>}
+
                         </ul>
                         <LoginNavigation />
                     </div>
