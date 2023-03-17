@@ -16,6 +16,7 @@ import { AttractionEdit } from './components/admin-section/attractions/attractio
 import * as countryService from './services/countriesService.js';
 import { AuthContext } from './contexts/AuthContext.js';
 import * as auth from './services/authServices.js';
+import { Logout } from './components/authentication/logout/Logout.js';
 
 function App() {
   const navigate = useNavigate();
@@ -35,14 +36,17 @@ function App() {
   const onUserLogin = async (values) => {
     try {
       var user = await auth.login(values);
-      var userDetails = await auth.getUser();
-      console.log(userDetails);
       setUser(user);
       console.log(user);
       navigate(routes.home)     
     } catch (error) {
       console.log(error.message);
     }
+  }
+  const onLogout = () => {
+    auth.logout();
+    setUser({});
+    navigate(routes.home)     
   }
   useEffect(() => {
     countryService.getAll()
@@ -65,6 +69,7 @@ function App() {
 
             <Route path={routes.login} element={<Login onSubmitLogin={onUserLogin} />} />
             <Route path={routes.register} element={<Register onSubmitRegister={onUserRegister} />} />
+            <Route path={routes.logout} element={<Logout onLogout={onLogout}/>} />
           </Routes>
         </main>
         <Footer />

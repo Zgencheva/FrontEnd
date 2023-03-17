@@ -7,4 +7,5 @@ export const routes = {
     'plan-details': '/myPlans/:planId',
     'login': '/login',
     'register': '/register',
+    'logout': '/logout',
 }

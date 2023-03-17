@@ -25,7 +25,7 @@ export const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link text-dark" to="/createPlan">Create Plan</Link>
                             </li>
-                            {user &&
+                            {user.accessToken &&
                                 <li className="nav-item">
                                     <Link className="nav-link text-dark" to="/myPlans">My plans</Link>
                                 </li>}
