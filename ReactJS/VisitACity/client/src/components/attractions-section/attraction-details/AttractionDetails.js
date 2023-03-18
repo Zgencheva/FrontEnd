@@ -12,7 +12,15 @@ export const AttractionDetails = () => {
     useEffect(() => {
         attractionService.getById(attractionId)
             .then(att => {
-                setAttraction(att);
+                if(user._id){
+                    attractionService.addUserReview(attractionId, user._id)
+                    .then(newAttraction=> setAttraction(newAttraction));
+                }
+                else{
+                    setAttraction(att);
+                }
+
+                
             });
     }, [attractionId]);
 
