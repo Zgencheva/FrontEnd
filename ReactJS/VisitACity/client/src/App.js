@@ -17,19 +17,20 @@ import * as countryService from './services/countriesService.js';
 import { AuthContext } from './contexts/AuthContext.js';
 import * as auth from './services/authServices.js';
 import { Logout } from './components/authentication/logout/Logout.js';
+import { useLocalStorage } from './hooks/useLocalStorage.js';
 
 function App() {
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useLocalStorage('user', {});
 
   const onUserRegister = async (values) => {
     try {
       var user = await auth.register(values);
-      console.log(user);
       setUser(user);
       navigate(routes.home)     
     } catch (error) {
+      //TODO: Error page:
       console.log(error.message)
     }
   }
@@ -37,16 +38,22 @@ function App() {
     try {
       var user = await auth.login(values);
       setUser(user);
-      console.log(user);
       navigate(routes.home)     
     } catch (error) {
+      //TODO: Error page:
       console.log(error.message);
     }
   }
   const onLogout = () => {
-    auth.logout();
-    setUser({});
-    navigate(routes.home)     
+    try {
+      auth.logout();
+      setUser({});
+      navigate(routes.home)     
+    } catch (error) {
+      //TODO: Error page:
+      console.log(error.message);
+    }
+   
   }
   useEffect(() => {
     countryService.getAll()

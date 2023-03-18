@@ -1,9 +1,11 @@
 import { Link, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as attractionService from '../../../services/attractionService.js';
 import styles from './AttractionDetails.module.css';
+import { AuthContext } from '../../../contexts/AuthContext.js';
 
-export const AttractionDetails = ({ user }) => {
+export const AttractionDetails = () => {
+    const { user } = useContext(AuthContext);
     const { attractionId } = useParams();
     const [attraction, setAttraction] = useState({});
 
@@ -48,12 +50,15 @@ export const AttractionDetails = ({ user }) => {
                     <li className={`${styles['btn-addPlan']}`}>
                         <button className="btn btn-success"><i className="fa fa-bus"></i>Add to plan</button>
                     </li>
-                    <li className={`${styles['btn-edit']}`}>
-                        <Link className="btn btn-outline-dark" to={`/admin/attractions/edit/${attractionId}`}><i className="fa-solid fa-pen"></i>Edit</Link>
-                    </li>
-                    <li className={`${styles['btn-edit']}`}>
-                        <button className='btn btn-outline-danger'><i className="fa-solid fa-trash"></i>Delete</button>
-                    </li>
+                    {user?.role == 'admin' &&
+                        <li className={`${styles['btn-edit']}`}>
+                            <Link className="btn btn-outline-dark" to={`/admin/attractions/edit/${attractionId}`}><i className="fa-solid fa-pen"></i>Edit</Link>
+                        </li>}
+                    {user?.role == 'admin' &&
+                        <li className={`${styles['btn-edit']}`}>
+                            <button className='btn btn-outline-danger'><i className="fa-solid fa-trash"></i>Delete</button>
+                        </li>}
+
                 </ul>
             </div>
             <div className={styles['picture-wrapper']}>
