@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Login.module.css';
 import { useForm } from '../../../hooks/useForm.js';
+import { ErrorContext } from '../../../contexts/ErrorContext.js';
 
 export const Login = ({onSubmitLogin}) => {
+    const {serverErrors} = useContext(
+        ErrorContext
+    );
+
     const { values, onValueChange, onSubmit } = useForm({}, onSubmitLogin);
     const [errors, setError] = useState({});
 
@@ -27,9 +32,10 @@ export const Login = ({onSubmitLogin}) => {
     }
     return (
         <form onSubmit={onSubmit} className={`${styles.form}`}>
+            {serverErrors.login?.isInvalid && <p className="text-danger">{serverErrors.login?.message}</p>}
             <h2>Use a local account to log in.</h2>
             <div className="mb-3">
-                <label for="exampleInputEmail1" className="form-label">Email address</label>
+                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                 <input 
                 type="email" 
                 className="form-control"
@@ -45,7 +51,7 @@ export const Login = ({onSubmitLogin}) => {
                 <p className="text-danger">{errors.email?.message}</p>
             }
             <div className="mb-3">
-                <label for="exampleInputPassword1" className="form-label">Password</label>
+                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                 <input 
                 type="password" 
                 className="form-control" 
@@ -60,7 +66,7 @@ export const Login = ({onSubmitLogin}) => {
             }
             <div className="mb-3 form-check">
                 <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-                    <label className="form-check-label" for="exampleCheck1">Check me out</label>
+                    <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
         </form>

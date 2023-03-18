@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 export const useForm = (initalValues, onSubmitRegister) => {
     const [values, setValues] = useState(initalValues);
@@ -12,12 +12,13 @@ export const useForm = (initalValues, onSubmitRegister) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if(onSubmitRegister){
+
+        if (onSubmitRegister) {
             onSubmitRegister(values)
         }
     }
     return {
-        values, 
+        values,
         onValueChange,
         onSubmit,
     }

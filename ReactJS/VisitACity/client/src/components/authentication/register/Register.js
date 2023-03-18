@@ -29,7 +29,7 @@ export const Register = ({onSubmitRegister}) => {
         <form onSubmit={onSubmit} className={`${styles.form}`}>
             <h2>Use a local account to log in.</h2>
             <div className="mb-3">
-                <label for="firstName" className="form-label">First name</label>
+                <label htmlFor="firstName" className="form-label">First name</label>
                 <input
                     type="text"
                     className="form-control"
@@ -45,7 +45,7 @@ export const Register = ({onSubmitRegister}) => {
                 </p>
             }
             <div className="mb-3">
-                <label for="lastName" className="form-label">Last name</label>
+                <label htmlFor="lastName" className="form-label">Last name</label>
                 <input
                     type="text"
                     name="lastName"
@@ -61,7 +61,7 @@ export const Register = ({onSubmitRegister}) => {
                 </p>
             }
             <div className="mb-3">
-                <label for="exampleInputEmail1" className="form-label">Email address</label>
+                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
                 <input
                     type="email"
                     className="form-control"
@@ -77,7 +77,7 @@ export const Register = ({onSubmitRegister}) => {
                 <p className="text-danger">{errors.email?.message}</p>
             }
             <div className="mb-3">
-                <label for="exampleInputPassword1" className="form-label">Password</label>
+                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
                 <input 
                 type="password" 
                 className="form-control" 
@@ -92,7 +92,7 @@ export const Register = ({onSubmitRegister}) => {
             }
             <div className="mb-3 form-check">
                 <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" for="exampleCheck1">Check me out</label>
+                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" className="btn btn-primary" disabled={Object.values(errors).some(er => er.isInvalid)}>Submit</button>
         </form>

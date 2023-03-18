@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/header/Header.js';
 import { Home } from './components/home/Home.js';
@@ -18,17 +18,19 @@ import { AuthContext } from './contexts/AuthContext.js';
 import * as auth from './services/authServices.js';
 import { Logout } from './components/authentication/logout/Logout.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
+import { ErrorContext } from './contexts/ErrorContext.js';
 
 function App() {
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
   const [user, setUser] = useLocalStorage('user', {});
+  const [serverErrors, setError] = useState({});
 
   const onUserRegister = async (values) => {
     try {
       var user = await auth.register(values);
       setUser(user);
-      navigate(routes.home)     
+      navigate(routes.home)
     } catch (error) {
       //TODO: Error page:
       console.log(error.message)
@@ -38,22 +40,28 @@ function App() {
     try {
       var user = await auth.login(values);
       setUser(user);
-      navigate(routes.home)     
+      navigate(routes.home)
     } catch (error) {
-      //TODO: Error page:
-      console.log(error.message);
+      setError(state=> ({
+        ...state,
+        login: {
+          isInvalid: true,
+          message: 'Invalid details',
+        }
+      }));
+      console.log(serverErrors);
     }
   }
-  const onLogout = () => {
+  const onLogout = async () => {
     try {
-      auth.logout();
+      await auth.logout();
       setUser({});
-      navigate(routes.home)     
+      navigate(routes.home)
     } catch (error) {
       //TODO: Error page:
       console.log(error.message);
     }
-   
+
   }
   useEffect(() => {
     countryService.getAll()
@@ -61,27 +69,30 @@ function App() {
   }, []);
 
   return (
-    <AuthContext.Provider value={{user}}>
-      <div className="App">
-        <Header />
+    
+      <AuthContext.Provider value={{ user }}>
+        <div className="App">
+          <Header />
+          <ErrorContext.Provider value={{ serverErrors }}>
+          <main>
+            <Routes>
+              <Route path={routes.home} element={<Home />} />
+              <Route path={routes.myPlans} element={<MyPlans />} />
+              <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />
+              <Route path={routes['attraction-details']} element={<AttractionDetails />} />
+              <Route path={routes['plan-details']} element={<PlanDetails />} />
+              <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
 
-        <main>
-          <Routes>
-            <Route path={routes.home} element={<Home />} />
-            <Route path={routes.myPlans} element={<MyPlans />} />
-            <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />
-            <Route path={routes['attraction-details']} element={<AttractionDetails />} />
-            <Route path={routes['plan-details']} element={<PlanDetails />} />
-            <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
-
-            <Route path={routes.login} element={<Login onSubmitLogin={onUserLogin} />} />
-            <Route path={routes.register} element={<Register onSubmitRegister={onUserRegister} />} />
-            <Route path={routes.logout} element={<Logout onLogout={onLogout}/>} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </AuthContext.Provider>
+              <Route path={routes.login} element={<Login onSubmitLogin={onUserLogin} />} />
+              <Route path={routes.register} element={<Register onSubmitRegister={onUserRegister} />} />
+              <Route path={routes.logout} element={<Logout onLogout={onLogout} />} />
+            </Routes>
+          </main>
+          </ErrorContext.Provider>
+          <Footer />
+        </div>
+      </AuthContext.Provider>
+   
   );
 }
 
