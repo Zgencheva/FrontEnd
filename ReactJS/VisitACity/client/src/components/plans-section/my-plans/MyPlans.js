@@ -14,9 +14,10 @@ export const MyPlans = () => {
             });
     }, [])
 
-    const onDelete = (planId) => {
-        planService.deletePlan(planId)
-        .then(setUserPlans(state=> state.filter(x=> x._id != planId)));
+    const onDelete = async (planId) => {
+        console.log(planId);    
+        // await planService.deletePlan(planId)
+        // .then(setUserPlans(state=> state.filter(x=> x._id != planId)));
     }
 
     return (
@@ -26,23 +27,22 @@ export const MyPlans = () => {
                 <NoPlans />
                 :
                 <div className="table-responsive">
-                    <table className="table accordion">
-                        <thead>
-                            <tr>
-                                <th scope="col">City</th>
-                                <th scope="col">Country</th>
-                                <th scope="col">From</th>
-                                <th scope="col">To</th>
-                                <th scope="col">Days</th>
-                                <th scope="col">Actions</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {userPlans.map(plan => <PlanPartial key={plan._id} plan={plan} onDelete={onDelete}/>)}
-                        </tbody>
-                    </table>
-                </div>
+                <table className="table accordion">
+                    <thead>
+                        <tr>
+                            <th scope="col">City</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Days</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {userPlans.map(plan => <PlanPartial key={plan._id} plan={plan} onDelete={onDelete}/>)}
+                    </tbody>
+                </table>
+            </div>
             }
 
         </div>

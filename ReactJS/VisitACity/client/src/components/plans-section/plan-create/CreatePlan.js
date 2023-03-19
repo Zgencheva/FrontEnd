@@ -56,13 +56,27 @@ export const CreatePlan = ({countries}) => {
             attractions: [],
             restaurants: [],
         })
-        var newPlan = await planService.createPlan(data);
-        navigate(routes.myPlans)     
+        try {
+            var newPlan = await planService.createPlan(data);
+            navigate(routes.myPlans)     
+
+        } catch (error) {
+            setError(state=> ({
+                ...state,
+                createPlan: {
+                    isInvalid: true,
+                    message: error.message,
+                }
+            }));
+        }
     }
 
     return (
         <form  onSubmit={submitHandler} className={`col-md-6 offset-md-3 ${styles['form-createPlan']}`}>
             <h2>Where are you travelling to?</h2>
+            {errors.createPlan?.isInvalid &&
+                    <span className="text-danger">{errors.createPlan?.message}</span>
+                    }
             <div className="form-group">
                 <label className="form-label">Country</label>
                 <select

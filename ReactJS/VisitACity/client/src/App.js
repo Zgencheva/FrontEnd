@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Header } from './components/header/Header.js';
 import { Home } from './components/home/Home.js';
 import { MyPlans } from './components/plans-section/my-plans/MyPlans.js';
-import { PlanDetails } from './components/plans-section/PlanDetails/PlanDetails.js';
+import { PlanDetails } from './components/plans-section/plan-details/PlanDetails.js';
 import { CreatePlan } from './components/plans-section/plan-create/CreatePlan.js';
 import { Login } from './components/authentication/login/Login.js';
 import { Register } from './components/authentication/register/Register.js';
@@ -49,7 +49,6 @@ function App() {
           message: 'Invalid details',
         }
       }));
-      console.log(serverErrors);
     }
   }
   const onLogout = async () => {
