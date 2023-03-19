@@ -1,27 +1,29 @@
-const baseUrl = 'http://localhost:3030/jsonstore/plans';
+import { requester } from "../helpers/requester.js";
+
+const baseUrl = 'http://localhost:3030/data/plans';
 
 export const getById = async (planId) => {
-    const response = await fetch(`${baseUrl}/${planId}`);
-    const result = await response.json();
+  const response = await fetch(`${baseUrl}/${planId}`);
+  const result = await response.json();
 
-    return result;
+  return result;
 }
 
 export const createPlan = async (planData) => {
-    const response = await fetch(`${baseUrl}`, {
-         method: 'POST',
-         headers: {
-           'content-type': 'application/json'
-         },
-         body: JSON.stringify({...planData})
-       })
-       const result = await response.json();
-       return result;
- }
+  const result = await requester(baseUrl, 'post', planData, true, false);
+  return result;
+}
 
-   export const deletePlan = async (planId) => {
-    const response = await fetch(`${baseUrl}/${planId}`, {
-        method: 'DELETE'});
-    const result = await response.json();
-    return result;
+export const deletePlan = async (planId) => {
+  await requester(`${baseUrl}/${planId}`, 'delete', undefined, true, true);
+
+}
+
+export const getUserPlans = async () => {
+  const userId = JSON.parse(localStorage.getItem('user'))._id;
+  const match = encodeURIComponent(`_ownerId="${userId}"`);
+
+  const result= await requester(`${baseUrl}?where=${match}`, 'get', undefined, true, false);
+ 
+  return result;
 }

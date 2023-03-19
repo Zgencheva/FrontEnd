@@ -6,15 +6,3 @@ export const getById = async (userId) => {
 
   return result;
 }
-
-export const addPlanToUser = async (userData) => {
-  const response = await fetch(`${baseUrl}/${userData._id}`, {
-       method: 'PUT',
-       headers: {
-         'content-type': 'application/json'
-       },
-       body: JSON.stringify({...userData})
-     })
-     const result = await response.json();
-     return result;
-}

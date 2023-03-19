@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CreatePlan.module.css';
 import { GetDate } from '../../../helpers/getDate.js';
-import { CreateGUID } from '../../../helpers/newGuid.js';
-import * as userService from '../../../services/userService.js';
 import {routes} from '../../../constants/routes.js'
 import { useForm } from '../../../hooks/useForm.js';
+import * as planService from '../../../services/planService.js';
 
 export const CreatePlan = ({countries}) => {
-   let userId = "efb8eea7-350b-4c19-8698-766196b21a30";
     const {values, onValueChange} = useForm({
         fromDate: GetDate(),
         toDate: GetDate(),
@@ -55,24 +53,10 @@ export const CreatePlan = ({countries}) => {
         e.preventDefault();
         var data = ({
             ...values,
-            userId,
             attractions: [],
             restaurants: [],
-            _id: CreateGUID(),
         })
-        const user = await userService.getById(userId);
-        if(user.plans.some(x=> x.city == data.city)){
-            setError(state => ({
-                ...state,
-                submit: {
-                    isInvalid: true,
-                    message: `You already have plans in ${data.city}"`
-                }
-            }))
-            return;
-        }
-        user.plans.push(data);
-        await userService.addPlanToUser(user);
+        var newPlan = await planService.createPlan(data);
         navigate(routes.myPlans)     
     }
 
