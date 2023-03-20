@@ -24,8 +24,10 @@ export const PlanDetails = () => {
             });
             
     }, [planId]);
-console.log(attractions);
-console.log(plan)
+    const onAttractionDelete = async (attractionId) => {
+        await planService.deleteAttractionFromPlan(planId, attractionId)
+        .then(res=> {setPlan(res); setAttraction(state=> state.filter(x=> x._id != attractionId))});
+    }
     const onDelete = async (planId) => {
 
         await planService.deletePlan(planId)
@@ -42,7 +44,7 @@ console.log(plan)
                 <p>You have no attractions yet.
                 </p>}
             <ol>
-                {attractions?.map(attraction => <PlanAttractionsPartial key={attraction._id} attraction={attraction} />)}
+                {attractions?.map(attraction => <PlanAttractionsPartial key={attraction._id} attraction={attraction} onAttractionDelete={()=> onAttractionDelete(attraction._id)}/>)}
             </ol>
             <p>See all attractions in {plan.city} <a>here</a></p>
             <h3>Restaurants:</h3>

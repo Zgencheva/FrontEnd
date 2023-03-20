@@ -36,6 +36,15 @@ export const addAttractionToPlan = async (attraction) => {
   return result;
 }
 
+export const deleteAttractionFromPlan = async (planId,attractionId) => {
+const currentPlan = await getById(planId);
+console.log(currentPlan);
+
+currentPlan.attractions = currentPlan.attractions.filter(x=> x != attractionId);
+  const result = await updatePlan(currentPlan);
+  return result;
+}
+
 export const deletePlan = async (planId) => {
   await requester(`${baseUrl}/${planId}`, 'delete', undefined, true, true);
 
