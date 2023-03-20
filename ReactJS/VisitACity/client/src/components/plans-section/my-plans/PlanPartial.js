@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { GetDateDiff } from "../../../helpers/getDateDiff.js";
 
 export const PlanPartial = ({ plan, onDelete }) => {
-    console.log(plan);
     let dateDiff = GetDateDiff(plan.fromDate, plan.toDate);
 
     return (

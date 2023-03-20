@@ -6,19 +6,12 @@ import * as planService from '../../../services/planService.js';
 
 export const MyPlans = () => {
     const [userPlans, setUserPlans] = useState([]);
-    console.log(userPlans);
     useEffect(() => {
         planService.getUserPlans()
             .then(plans => {
                 setUserPlans(plans)
             });
     }, [])
-
-    const onDelete = async (planId) => {
-        console.log(planId);    
-        // await planService.deletePlan(planId)
-        // .then(setUserPlans(state=> state.filter(x=> x._id != planId)));
-    }
 
     return (
         <div className={`container shadow py-2 ${styles['container-myPlans']}`}>
@@ -39,7 +32,7 @@ export const MyPlans = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {userPlans.map(plan => <PlanPartial key={plan._id} plan={plan} onDelete={onDelete}/>)}
+                        {userPlans.map(plan => <PlanPartial key={plan._id} plan={plan}/>)}
                     </tbody>
                 </table>
             </div>

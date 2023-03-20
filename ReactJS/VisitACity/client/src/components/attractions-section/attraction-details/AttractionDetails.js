@@ -3,8 +3,11 @@ import { useState, useEffect, useContext } from 'react';
 import * as attractionService from '../../../services/attractionService.js';
 import styles from './AttractionDetails.module.css';
 import { AuthContext } from '../../../contexts/AuthContext.js';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../../constants/routes.js';
 
 export const AttractionDetails = () => {
+    const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const { attractionId } = useParams();
     const [attraction, setAttraction] = useState({});
@@ -23,7 +26,11 @@ export const AttractionDetails = () => {
                 
             });
     }, [attractionId]);
-
+    const AddPlanHandler = async () => {
+        if(user.email == null){
+            navigate(routes.login);
+        }
+    }
     return (
         <section className={`${styles.wrapper}`}>
             <div className={`${styles.content}`}>
@@ -56,7 +63,7 @@ export const AttractionDetails = () => {
                 </ul>
                 <ul className={`${styles.btns}`}>
                     <li className={`${styles['btn-addPlan']}`}>
-                        <button className="btn btn-success"><i className="fa fa-bus"></i>Add to plan</button>
+                        <button onClick={AddPlanHandler} className="btn btn-success"><i className="fa fa-bus"></i>Add to plan</button>
                     </li>
                     {user?.role == 'admin' &&
                         <li className={`${styles['btn-edit']}`}>

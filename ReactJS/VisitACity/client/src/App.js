@@ -84,7 +84,7 @@ function App() {
 
               <Route path={routes.login} element={<Login onSubmitLogin={onUserLogin} />} />
               <Route path={routes.register} element={<Register onSubmitRegister={onUserRegister} />} />
-              <Route path={routes.logout} element={<Logout onLogout={onLogout} />} />
+              <Route path={routes.logout} element={<Logout onLogout={()=>onLogout()} />} />
             </Routes>
           </main>
           </ErrorContext.Provider>
