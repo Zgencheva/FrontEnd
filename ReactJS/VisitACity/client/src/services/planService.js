@@ -11,15 +11,32 @@ export const getById = async (planId) => {
 
 export const createPlan = async (planData) => {
   const userPlans = await getUserPlans();
-  if(userPlans.some(x=> x.city == planData.city)){
+  if (userPlans.some(x => x.city == planData.city)) {
     throw new Error(`You already have plan in ${planData.city}`)
   }
   const result = await requester(baseUrl, 'post', planData, true, false);
   return result;
 }
+export const updatePlan = async (planData) => {
+
+  const result = await requester(`${baseUrl}/${planData._id}`, 'put', planData, true, false);
+  return result;
+}
+export const addAttractionToPlan = async (attraction) => {
+  const userPlans = await getUserPlans();
+  const currentPlan = userPlans.find(x => x.city == attraction.city.name)
+  if (!currentPlan) {
+    throw new Error(`You do not have plans in ${attraction.city.name}`)
+  }
+  if (currentPlan.attractions.some(x => x == attraction._id)) {
+    throw new Error(`You already have ${attraction.name} in your plan to ${attraction.city.name}`)
+  }
+  currentPlan.attractions.push(attraction._id);
+  const result = await updatePlan(currentPlan);
+  return result;
+}
 
 export const deletePlan = async (planId) => {
-  console.log(planId);
   await requester(`${baseUrl}/${planId}`, 'delete', undefined, true, true);
 
 }
@@ -29,8 +46,8 @@ export const getUserPlans = async () => {
 
   const match = encodeURIComponent(`_ownerId="${userId}"`);
 
-  const result= await requester(`${baseUrl}?where=${match}`, 'get', undefined, true, false);
- 
+  const result = await requester(`${baseUrl}?where=${match}`, 'get', undefined, true, false);
+
   return result;
 }
 
