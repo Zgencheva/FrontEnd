@@ -1,3 +1,5 @@
+import { requester } from "../helpers/requester.js";
+
 const baseUrl = 'http://localhost:3030/jsonstore/attractions';
 
 export const getAll = async () => {
@@ -15,35 +17,18 @@ export const getById = async (attractionId) => {
 }
 
 export const createAttraction = async (attractionData) => {
-  const response = await fetch(`${baseUrl}`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({ ...attractionData })
-  })
-  const result = await response.json();
+  const result = await requester(baseUrl, 'post', attractionData, true, false);
   return result;
 }
 
 export const editAttraction = async (attractionId, attractionData) => {
 
-  const response = await fetch(`${baseUrl}/${attractionId}`, {
-    method: 'PUT',
-    headers: {
-      'content-type': 'application/json'
-    },
-    body: JSON.stringify({ ...attractionData })
-  })
-  const result = await response.json();
+  const result = await requester(`${baseUrl}/${attractionId}`,'put', attractionData, false, false)
   return result;
 }
 
 export const deleteAttraction = async (attractionId) => {
-  const response = await fetch(`${baseUrl}/${attractionId}`, {
-    method: 'DELETE'
-  });
-  const result = await response.json();
+  const result = await fetch(`${baseUrl}/${attractionId}`,'delete', undefined, false, true)
   return result;
 }
 

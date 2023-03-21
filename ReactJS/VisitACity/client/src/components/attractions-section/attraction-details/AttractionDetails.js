@@ -18,6 +18,7 @@ export const AttractionDetails = () => {
     useEffect(() => {
         attractionService.getById(attractionId)
             .then(att => {
+                console.log(attraction);
                 if(user._id){
                     attractionService.addUserReview(attractionId, user._id)
                     .then(newAttraction=> setAttraction(newAttraction));
@@ -25,6 +26,7 @@ export const AttractionDetails = () => {
                 else{
                     setAttraction(att);
                 }
+                setAttraction(att);
 
             });
     }, [attractionId]);
@@ -49,7 +51,7 @@ export const AttractionDetails = () => {
                     {attraction?.name}
                 </h1>
                 <h4>
-                    {attraction?.city?.name}
+                    {attraction?.city}
                 </h4>
                 <div className="card-text feature-icon">
                 </div>

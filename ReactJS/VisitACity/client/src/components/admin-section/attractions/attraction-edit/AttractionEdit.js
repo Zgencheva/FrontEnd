@@ -34,7 +34,7 @@ export const AttractionEdit = ({ countries }) => {
             }))
         }       
         console.log(attraction) 
-        attractionService.editAttraction(attractionId, attraction);
+        await attractionService.editAttraction(attractionId, attraction);
         navigate(`/attractions/${attractionId}`)     
 
     }

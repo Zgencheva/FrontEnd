@@ -10,7 +10,7 @@ export const Attraction = ({ attraction }) => {
             <div className={`card-body`}>
                 <h4 className="card-title text-center">{attraction.name}</h4>
                 <p></p>
-                <h5 className="card-text text-center">{attraction.city.name}</h5>
+                <h5 className="card-text text-center">{attraction.city}</h5>
                 <div className={`card-text feature-icon ${styles.cardBody}`}>
                     <i className="fa fa-dollar-sign"></i> <span>Price: {attraction.price}</span>
                 </div>

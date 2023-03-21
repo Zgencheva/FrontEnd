@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { routes } from "../../constants/routes.js";
+
 export const Admin = () =>{
     return (
         <div className="dropdown">
@@ -5,9 +8,7 @@ export const Admin = () =>{
     Admin
   </button>
   <ul className="dropdown-menu">
-    <li><a className="dropdown-item" href="#">Action</a></li>
-    <li><a className="dropdown-item" href="#">Another action</a></li>
-    <li><a className="dropdown-item" href="#">Something else here</a></li>
+    <Link to={routes["attraction-create"]} className="dropdown-item" href="#">Create attraction</Link>
   </ul>
 </div>
     );

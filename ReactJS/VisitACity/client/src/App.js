@@ -19,6 +19,7 @@ import * as auth from './services/authServices.js';
 import { Logout } from './components/authentication/logout/Logout.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { ErrorContext } from './contexts/ErrorContext.js';
+import { AttractionCreate } from './components/admin-section/attractions/attraction-create/AttractionCreate.js';
 
 function App() {
   const navigate = useNavigate();
@@ -79,6 +80,7 @@ function App() {
               <Route path={routes.myPlans} element={<MyPlans />} />
               <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />
               <Route path={routes['attraction-details']} element={<AttractionDetails />} />
+              <Route path={routes['attraction-create']} element={<AttractionCreate countries={countries}/>}/>
               <Route path={routes['plan-details']} element={<PlanDetails />} />
               <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
 
