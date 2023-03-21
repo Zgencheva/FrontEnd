@@ -25,18 +25,12 @@ export const AttractionEdit = ({ countries }) => {
     };
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(selectedImage);
         if(selectedImage != null) {
-            const url = await saveImageToCloudinary(selectedImage);
-            setAttraction(state => ({
-                ...state,
-                image: url,
-            }))
+            attraction.image = await saveImageToCloudinary(selectedImage)
         }       
-        console.log(attraction) 
+        setAttraction(attraction)
         await attractionService.editAttraction(attractionId, attraction);
-        navigate(`/attractions/${attractionId}`)     
-
+        navigate(`/attractions/${attractionId}`)
     }
     
     return (

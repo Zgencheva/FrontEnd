@@ -1,34 +1,22 @@
+import { requester } from "../helpers/requester.js";
+
 const baseUrl = 'http://localhost:3030/jsonstore/cities';
 
 export const getAll = async () => {
-    const response = await fetch(baseUrl);
-    const result = await response.json();
-
+    const result = await requester(baseUrl, 'get', undefined, false, false);
     return result;
 }
 
 export const getById = async (cityId) => {
-    const response = await fetch(`${baseUrl}/${cityId}`);
-    const result = await response.json();
-
+    const result = await requester(`${baseUrl}/${cityId}`, 'get', undefined, false, false);
     return result;
 }
 
 export const createCity = async (cityData) => {
-    const response = await fetch(`${baseUrl}`, {
-         method: 'POST',
-         headers: {
-           'content-type': 'application/json'
-         },
-         body: JSON.stringify({...cityData})
-       })
-       const result = await response.json();
+    const result = await requester(`${baseUrl}`, 'put', cityData, false, false)
        return result;
  }
 
    export const deleteCity = async (cityId) => {
-    const response = await fetch(`${baseUrl}/${cityId}`, {
-        method: 'DELETE'});
-    const result = await response.json();
-    return result;
+    await requester(`${baseUrl}/${cityId}`, 'delete', undefined, false, true)
 }

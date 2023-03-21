@@ -18,7 +18,6 @@ export const AttractionDetails = () => {
     useEffect(() => {
         attractionService.getById(attractionId)
             .then(att => {
-                console.log(attraction);
                 if(user._id){
                     attractionService.addUserReview(attractionId, user._id)
                     .then(newAttraction=> setAttraction(newAttraction));
@@ -43,6 +42,13 @@ export const AttractionDetails = () => {
             }
             navigate(`/myPlans/${res._id}`);
         }
+    }
+    const onDelete = async () => {
+        await attractionService.deleteAttraction(attractionId)
+        .then(
+            navigate(`/`)
+            );
+        
     }
     return (
         <section className={`${styles.wrapper}`}>
@@ -85,7 +91,24 @@ export const AttractionDetails = () => {
                         </li>}
                     {user?.role == 'admin' &&
                         <li className={`${styles['btn-edit']}`}>
-                            <button className='btn btn-outline-danger'><i className="fa-solid fa-trash"></i>Delete</button>
+                            <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                Delete
+            </button>
+
+            <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Are you sure you want to delete {attraction.name}?</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" className="btn btn-secondary" onClick={onDelete} data-bs-dismiss="modal">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
                         </li>}
 
                 </ul>
