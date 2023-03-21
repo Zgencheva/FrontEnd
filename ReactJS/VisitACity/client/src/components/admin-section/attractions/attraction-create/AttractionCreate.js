@@ -28,9 +28,8 @@ export const AttractionCreate = ({ countries }) => {
         if(selectedImage != null) {
             attraction.image = await saveImageToCloudinary(selectedImage);
         } 
-        await attractionService.createAttraction(attraction);
-        navigate(`/attractions/${attraction._id}`);
-
+        await attractionService.createAttraction(attraction)
+        .then(res=>  navigate(`/attractions/${res._id}`));
     }
     const renderCities = (e) => {
         let id = e.target.value;
@@ -51,7 +50,7 @@ export const AttractionCreate = ({ countries }) => {
                 onChange={onValueChange}
                 onBlur={(e) => renderCities(e)}>
                 <option value={values.country}>Select country</option>
-                {countries.map(c => <option key={c._id} value={c.name}>{c.name}</option>)}
+                {countries.map(c => <option key={c.name} value={c.name}>{c.name}</option>)}
             </select>
             <span className="text-danger"></span>
         </div>
@@ -63,7 +62,7 @@ export const AttractionCreate = ({ countries }) => {
                 className="form-control"
                 onChange={onValueChange}>
                 <option value={values.city}>Select city</option>
-                {cities.map(s => <option key={s._id} value={s.name}>{s.name}</option>)}
+                {cities.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
             <span className="text-danger"></span>
         </div>
@@ -137,7 +136,7 @@ export const AttractionCreate = ({ countries }) => {
                             <span className="text-danger"></span>
                         </div>
                         <div className="mb-3">
-                            <input className="btn btn-primary" type="submit" value="Update" />
+                            <input className="btn btn-primary" type="submit" value="Create" />
                         </div>
                     </form>
                 </div>

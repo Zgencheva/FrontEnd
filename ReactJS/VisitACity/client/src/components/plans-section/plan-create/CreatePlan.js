@@ -8,6 +8,7 @@ import * as planService from '../../../services/planService.js';
 import { executeAsync } from '../../../helpers/exceptions.js';
 
 export const CreatePlan = ({ countries }) => {
+    console.log(countries);
     const { values, onValueChange } = useForm({
         fromDate: GetDate(),
         toDate: GetDate(),
@@ -94,7 +95,7 @@ return (
                 className="form-control"
                 onChange={onValueChange}>
                 <option value={values.city}>Select city</option>
-                {cities.map(s => <option key={s._id} value={s.name}>{s.name}</option>)}
+                {cities.map(s => <option key={s} value={s}>{s}</option>)}
             </select>
             <span className="text-danger"></span>
         </div>

@@ -1,28 +1,28 @@
 {
-    "country_1": {
-        "_id": 1,
+    "1": {
+        "_id": "1",
         "name": "Bulgaria",
-        "cities": [{"_id": 101, "name": "Sofia"}, 
-                    {"_id": 102, "name": "Plovdiv"},
-                    {"_id": 103, "name": "Varna"},
-                    {"_id": 104, "name": "Tryavna"},
-                    {"_id": 105, "name": "Hisarya"},
-                    {"_id": 106, "name": "Velingrad"},
-                    {"_id": 107, "name": "Burgas"}]
+        "cities": ["Sofia", 
+                    "Plovdiv",
+                   "Varna",
+                    "Tryavna",
+                    "Hisarya",
+                    "Velingrad",
+                    "Burgas"]
     },
-    "country_2": {
-        "_id": 2,
+    "2": {
+        "_id": "2",
         "name": "Croatia",
         "cities": []
     },
-    "country_3": {
-        "_id": 3,
+    "3": {
+        "_id": "3",
         "name": "USA",
         "cities": []
     },
-    "country_4": {
-        "_id": 4,
+    "4": {
+        "_id": "4",
         "name": "Thailand",
-        "cities": [{"_id": 401, "name": "Patong"}]
+        "cities": ["Patong"]
     }
 }

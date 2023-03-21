@@ -20,6 +20,8 @@ import { Logout } from './components/authentication/logout/Logout.js';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { ErrorContext } from './contexts/ErrorContext.js';
 import { AttractionCreate } from './components/admin-section/attractions/attraction-create/AttractionCreate.js';
+import { CityCreate } from './components/admin-section/cities/CityCreate.js';
+import { CountryCreate } from './components/admin-section/countries/CountryCreate.js';
 
 function App() {
   const navigate = useNavigate();
@@ -83,6 +85,8 @@ function App() {
               <Route path={routes['attraction-create']} element={<AttractionCreate countries={countries}/>}/>
               <Route path={routes['plan-details']} element={<PlanDetails />} />
               <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
+              <Route path={routes['city-create']} element={<CityCreate countries={countries} />} />
+              <Route path={routes['country-create']} element={<CountryCreate countries={countries}/>} />
 
               <Route path={routes.login} element={<Login onSubmitLogin={onUserLogin} />} />
               <Route path={routes.register} element={<Register onSubmitRegister={onUserRegister} />} />

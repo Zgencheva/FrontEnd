@@ -9,4 +9,6 @@ export const routes = {
     'login': '/login',
     'register': '/register',
     'logout': '/logout',
+    'city-create': '/admin/cities/create',
+    'country-create': '/admin/countries/create'
 }

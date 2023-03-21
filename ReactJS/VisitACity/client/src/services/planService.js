@@ -3,16 +3,17 @@ import { requester } from "../helpers/requester.js";
 const baseUrl = 'http://localhost:3030/data/plans';
 
 export const getById = async (planId) => {
-  const result = await requester(`${baseUrl}/${planId}`, 'get', undefined, false, false);
+  const result = await requester(`${baseUrl}/${planId}`, 'get', undefined, true, false);
+  console.log(result);
   return result;
 }
 
 export const createPlan = async (planData) => {
-  const userPlans = await getUserPlans();
-  console.log(userPlans);
-  if (userPlans.some(x => x.city == planData.city)) {
-    throw new Error(`You already have plan in ${planData.city}`)
-  }
+  // const userPlans = await getUserPlans();
+  // console.log(userPlans);
+  // if (userPlans.some(x => x.city == planData.city)) {
+  //   throw new Error(`You already have plan in ${planData.city}`)
+  // }
   const result = await requester(baseUrl, 'post', planData, true, false);
   return result;
 }
