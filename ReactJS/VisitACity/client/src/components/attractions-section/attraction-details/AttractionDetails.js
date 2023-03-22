@@ -10,7 +10,7 @@ import { executeAsync } from '../../../helpers/exceptions.js';
 
 export const AttractionDetails = () => {
     const navigate = useNavigate();
-    const { user } = useContext(AuthContext);
+    const { user, isAuthenticated, isAdmin } = useContext(AuthContext);
     const { attractionId } = useParams();
     const [attraction, setAttraction] = useState({});
     const [error, setError] = useState(new Error());
@@ -18,7 +18,7 @@ export const AttractionDetails = () => {
     useEffect(() => {
         attractionService.getById(attractionId)
             .then(att => {
-                if(user._id){
+                if(isAuthenticated){
                     attractionService.addUserReview(attractionId, user._id)
                     .then(newAttraction=> setAttraction(newAttraction));
                 }
@@ -31,7 +31,7 @@ export const AttractionDetails = () => {
     }, [attractionId]);
 
     const AddPlanHandler = async () => {
-        if(user.email == null){
+        if(!isAuthenticated){
             navigate(routes.login);
         }
         else{
@@ -85,11 +85,11 @@ export const AttractionDetails = () => {
                         <button onClick={AddPlanHandler} className="btn btn-success"><i className="fa fa-bus"></i>Add to plan</button>
                     </li>
 
-                    {user?.role == 'admin' &&
+                    {isAdmin &&
                         <li className={`${styles['btn-edit']}`}>
                             <Link className="btn btn-outline-dark" to={`/admin/attractions/edit/${attractionId}`}><i className="fa-solid fa-pen"></i>Edit</Link>
                         </li>}
-                    {user?.role == 'admin' &&
+                    {isAdmin  &&
                         <li className={`${styles['btn-edit']}`}>
                             <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Delete

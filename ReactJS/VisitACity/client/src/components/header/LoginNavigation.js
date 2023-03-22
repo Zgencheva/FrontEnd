@@ -7,15 +7,15 @@ import { useContext } from "react";
 
 export const LoginNavigation = () => {
 
-    const {user} = useContext(AuthContext);
+    const {isAuthenticated, isAdmin, user} = useContext(AuthContext);
     return (
         <ul className="navbar-nav">
-            {user.accessToken ?
+            {isAuthenticated ?
                 <>
                     <li className="nav-item">
                         <a className="nav-link text-dark" title="Manage">Hello, {user !=null ? user.email : 'adventurer'}!</a>
                     </li>
-                    {user?.role == 'admin' && <Admin />}
+                    {isAdmin && <Admin />}
                     <li className="nav-item">
                         <Link to="/logout" className="nav-link btn btn-link text-dark">Logout</Link>
                     </li>

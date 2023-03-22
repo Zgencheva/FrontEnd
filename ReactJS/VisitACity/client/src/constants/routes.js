@@ -10,5 +10,6 @@ export const routes = {
     'register': '/register',
     'logout': '/logout',
     'city-create': '/admin/cities/create',
-    'country-create': '/admin/countries/create'
+    'country-create': '/admin/countries/create',
+    'unauthorized': ''
 }

@@ -6,7 +6,10 @@ import {
 import { useContext } from "react";
 
 export const Header = () => {
-    const { user } = useContext(AuthContext);
+
+    const {isAuthenticated} = useContext(
+        AuthContext
+    );
     return (
         <header className="App-header">
             <div className="navbar navbar-expand-sm navbar-dark bg-primary fixed-top border-bottom box-shadow mb-3">
@@ -21,12 +24,12 @@ export const Header = () => {
                             <li className="nav-item">
                                 <Link className="nav-link text-dark" to="/">Home</Link>
                             </li>
-                            {user.accessToken &&
+                            {isAuthenticated &&
                                 <li className="nav-item">
                                     <Link className="nav-link text-dark" to="/createPlan">Create Plan</Link>
                                 </li>
                             }
-                            {user.accessToken &&
+                            {isAuthenticated &&
                                 <li className="nav-item">
                                     <Link className="nav-link text-dark" to="/myPlans">My plans</Link>
                                 </li>}
