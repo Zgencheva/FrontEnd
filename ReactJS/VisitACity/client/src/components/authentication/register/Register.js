@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styles from './Register.module.css';
 import { useForm } from '../../../hooks/useForm.js';
+import { AuthContext } from '../../../contexts/AuthContext.js';
 
-export const Register = ({onSubmitRegister}) => {
-    const { values, onValueChange, onSubmit } = useForm({}, onSubmitRegister);
+export const Register = () => {
+    const {serverErrors, onUserRegister} = useContext(
+        AuthContext
+    );
+    const { values, onValueChange, onSubmit } = useForm({}, onUserRegister);
     const [errors, setError] = useState({});
 
     const validateEmail = (e) => {

@@ -1,6 +1,10 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../../contexts/AuthContext.js";
 
-export const Logout = ({onLogout}) => {
+export const Logout = () => {
+    const {serverErrors, onLogout} = useContext(
+        AuthContext
+    );
     useEffect(()=> {
         onLogout();
     },[])

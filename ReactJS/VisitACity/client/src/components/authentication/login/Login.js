@@ -1,14 +1,13 @@
 import { useContext, useState } from 'react';
 import styles from './Login.module.css';
 import { useForm } from '../../../hooks/useForm.js';
-import { ErrorContext } from '../../../contexts/ErrorContext.js';
+import { AuthContext } from '../../../contexts/AuthContext.js';
 
-export const Login = ({onSubmitLogin}) => {
-    const {serverErrors} = useContext(
-        ErrorContext
+export const Login = () => {
+    const {serverErrors, onUserLogin} = useContext(
+        AuthContext
     );
-
-    const { values, onValueChange, onSubmit } = useForm({}, onSubmitLogin);
+    const { values, onValueChange, onSubmit } = useForm({}, onUserLogin);
     const [errors, setError] = useState({});
 
     const validateEmail = (e) => {
