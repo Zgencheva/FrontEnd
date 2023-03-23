@@ -8,7 +8,7 @@ export const AdminGuard = () => {
         AuthContext
     );
     if(!isAdmin){
-        return <Navigate to={routes.login} replace/>
+        return <Navigate to={routes.unauthorized} replace/>
     }
 
     return <Outlet/>

@@ -19,6 +19,8 @@ import { AttractionCreate } from './components/admin-section/attractions/attract
 import { CityCreate } from './components/admin-section/cities/CityCreate.js';
 import { CountryCreate } from './components/admin-section/countries/CountryCreate.js';
 import { PrivateGuard } from './constants/PrivateGuard.js';
+import { Unauthorized } from './components/errors/Unauthorized.js';
+import { AdminGuard } from './constants/AdminGuard.js';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -38,17 +40,20 @@ function App() {
             <Route path={routes.home} element={<Home />} />
             <Route path={routes['attraction-details']} element={<AttractionDetails />} />
             <Route element={<PrivateGuard />}>
-                <Route path={routes['attraction-create']} element={<AttractionCreate countries={countries} />} />
-                <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
-                <Route path={routes['country-create']} element={<CountryCreate countries={countries} />} />
-                <Route path={routes['city-create']} element={<CityCreate countries={countries} />} />
-                <Route path={routes['plan-details']} element={<PlanDetails />} />
-                <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />
-                <Route path={routes.myPlans} element={<MyPlans />} />
-                <Route path={routes.logout} element={<Logout />} />
+              <Route path={routes['plan-details']} element={<PlanDetails />} />
+              <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />
+              <Route path={routes.myPlans} element={<MyPlans />} />
+              <Route path={routes.logout} element={<Logout />} />
             </Route>
+            <Route element={<AdminGuard/>}>
+              <Route path={routes['attraction-create']} element={<AttractionCreate countries={countries} />} />
+              <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
+              <Route path={routes['country-create']} element={<CountryCreate countries={countries} />} />
+              <Route path={routes['city-create']} element={<CityCreate countries={countries} />} />
+              /</Route>
             <Route path={routes.login} element={<Login />} />
             <Route path={routes.register} element={<Register />} />
+            <Route path={routes.unauthorized} element={<Unauthorized />} />
           </Routes>
         </main>
         <Footer />

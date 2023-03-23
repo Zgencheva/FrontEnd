@@ -11,5 +11,5 @@ export const routes = {
     'logout': '/logout',
     'city-create': '/admin/cities/create',
     'country-create': '/admin/countries/create',
-    'unauthorized': ''
+    'unauthorized': '/error/unauthorized'
 }
