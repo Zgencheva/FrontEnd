@@ -38,6 +38,7 @@ function App() {
         <main>
           <Routes>
             <Route path={routes.home} element={<Home />} />
+            <Route path={routes.homeWithQuery} element={<Home />} />
             <Route path={routes['attraction-details']} element={<AttractionDetails />} />
             <Route element={<PrivateGuard />}>
               <Route path={routes['plan-details']} element={<PlanDetails />} />

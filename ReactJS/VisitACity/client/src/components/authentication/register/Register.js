@@ -31,7 +31,7 @@ export const Register = () => {
     }
     return (
         <form onSubmit={onSubmit} className={`${styles.form}`}>
-            <h2>Use a local account to log in.</h2>
+        {serverErrors.register?.isInvalid && <p className="text-danger">{serverErrors.register?.message}</p>}            <h2>Use a local account to log in.</h2>
             <div className="mb-3">
                 <label htmlFor="firstName" className="form-label">First name</label>
                 <input
@@ -99,6 +99,8 @@ export const Register = () => {
                 <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
             <button type="submit" className="btn btn-primary" disabled={Object.values(errors).some(er => er.isInvalid)}>Submit</button>
+           
         </form>
+       
     );
 }

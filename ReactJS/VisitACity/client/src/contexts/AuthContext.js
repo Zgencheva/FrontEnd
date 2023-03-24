@@ -20,8 +20,13 @@ export const AuthProvider = ({
           setUser(user);
           navigate(routes.home)
         } catch (error) {
-          //TODO: Error page:
-          console.log(error.message)
+          setError(state=> ({
+            ...state,
+            register: {
+              isInvalid: true,
+              message: 'Something went wrong!',
+            }
+          }));
         }
       }
       const onUserLogin = async (values) => {

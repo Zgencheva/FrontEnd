@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { routes } from '../../../constants/routes.js';
 import styles from './Hero.module.css';
 
 export const Hero = ({ statistics }) => {
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         cityName: '',
         radioOption: 'attraction',
@@ -16,10 +19,9 @@ export const Hero = ({ statistics }) => {
     const submitHandler = (e) => {
         e.preventDefault();
 
-        // let values = Object.fromEntries(new FormData(e.target))
-        // console.log(values);
-
-        console.log(values);
+        let values = Object.fromEntries(new FormData(e.target));
+        navigate(`/${values.cityName}/${values.radioOption}`);
+        console.log({...values});
     };
     return (<div className={`bg ${styles.bg}`}>
         <div className={`text-center page-header ${styles.pageHeader} `}>

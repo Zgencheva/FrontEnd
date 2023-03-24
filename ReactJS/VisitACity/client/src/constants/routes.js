@@ -1,5 +1,6 @@
 export const routes = {
     'home': '/',
+    'homeWithQuery': "/:cityName?/:radioOption?",
     'myPlans': '/myPlans',
     'createPlan': '/createPlan',
     'attraction-details': '/attractions/:attractionId',
