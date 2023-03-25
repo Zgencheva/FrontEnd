@@ -10,11 +10,14 @@ export const Home = () => {
     const navigate = useNavigate();
 
     const {cityName, radioOption} = useParams();
+    console.log(cityName);
+    console.log(radioOption);
     const [searchTerms, setsearchTerms] = useState({});
     const [heroStatistics, setHeroStatistics] = useState({});
     const [renderBody, setRenderBody] = useState([])
 
     useEffect(() => {
+        console.log('in use effect');
             attractionService.getAll()
             .then(attractions => {
                 setHeroStatistics(state => ({
@@ -37,18 +40,15 @@ export const Home = () => {
                     cities: Object.values(cities).length,
                 }));
             });
-            setsearchTerms({});
-    }, [searchTerms]);
+    }, [cityName, radioOption]);
 
     const onSearch = (e) => {
         e.preventDefault();
 
         let values = Object.fromEntries(new FormData(e.target));
         navigate(`/${values.cityName}/${values.radioOption}`);
-        console.log({...values});
-        setsearchTerms({cityName: values.cityName, radioOption: values.radioOption});
     }
-    console.log(searchTerms);
+
     return (
         <main role="main" className="pb-3">
             <Hero statistics={heroStatistics} onSearch={onSearch}/>

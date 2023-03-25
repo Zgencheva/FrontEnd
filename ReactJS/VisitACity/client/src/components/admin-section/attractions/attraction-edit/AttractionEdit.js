@@ -10,6 +10,8 @@ export const AttractionEdit = ({ countries }) => {
     const { attractionId } = useParams();
     const [attraction, setAttraction] = useState({});
     const [selectedImage, setSelectedImage] = useState(null);
+    const [errors, setError] = useState({});
+
     useEffect(() => {
         attractionService.getById(attractionId)
             .then(att => {
@@ -25,14 +27,41 @@ export const AttractionEdit = ({ countries }) => {
     };
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        if(selectedImage != null) {
+        if (selectedImage != null) {
             attraction.image = await saveImageToCloudinary(selectedImage)
-        }       
+        }
         setAttraction(attraction)
         await attractionService.editAttraction(attractionId, attraction);
         navigate(`/attractions/${attractionId}`)
     }
-    
+    const minLength = (e, minValue) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: e.target.value.length < minValue,
+                message: `Input should be at least ${minValue} characters long`
+            },
+
+        }))
+    }
+    const positiveNumber = (e) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: Number(e.target.value) < 0 || isNaN(e.target.value),
+                message: `Input should be a positive number`
+            },
+        }))
+    }
+    const validateUrl = (e) => {
+        setError(state => ({
+            ...state,
+            [e.target.name]: {
+                isInvalid: !(/^(ftp|http|https):\/\/[^ "]+$/.test(e.target.value)),
+                message: 'Invalid url'
+            },
+        }));
+    };
     return (
         <section id="attraction-edit">
             <h1 className="text-center"> Update attraction</h1>
@@ -46,8 +75,11 @@ export const AttractionEdit = ({ countries }) => {
                                 className="form-control"
                                 aria-required="true"
                                 value={attraction.name}
-                                onChange={onValueChange} />
-                            <span className="text-danger"></span>
+                                onChange={onValueChange}
+                                onBlur={(e) => minLength(e, 3)} />
+                            {errors.name?.isInvalid &&
+                                <p className="text-danger">{errors.name?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Type</label>
@@ -56,8 +88,11 @@ export const AttractionEdit = ({ countries }) => {
                                 aria-required="true"
                                 name="type"
                                 value={attraction.type}
-                                onChange={onValueChange} />
-                            <span className="text-danger"></span>
+                                onChange={onValueChange}
+                                onBlur={(e) => minLength(e, 3)} />
+                            {errors.type?.isInvalid &&
+                                <p className="text-danger">{errors.type?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Price</label>
@@ -66,8 +101,10 @@ export const AttractionEdit = ({ countries }) => {
                                 aria-required="true"
                                 name="price"
                                 value={attraction.price}
-                                onChange={onValueChange} />
-                            <span className="text-danger"></span>
+                                onChange={onValueChange} onBlur={(e) => positiveNumber(e)} />
+                            {errors.price?.isInvalid &&
+                                <p className="text-danger">{errors.price?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Image</label>
@@ -85,8 +122,11 @@ export const AttractionEdit = ({ countries }) => {
                                 aria-required="true"
                                 name="address"
                                 value={attraction.address}
-                                onChange={onValueChange} />
-                            <span className="text-danger"></span>
+                                onChange={onValueChange} 
+                                onBlur={(e) => minLength(e, 6)} />
+                            {errors.address?.isInvalid &&
+                                <p className="text-danger">{errors.address?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">AttractionUrl</label>
@@ -95,8 +135,11 @@ export const AttractionEdit = ({ countries }) => {
                                 aria-required="true"
                                 name="attractionUrl"
                                 value={attraction.attractionUrl}
-                                onChange={onValueChange} />
-                            <span className="text-danger"></span>
+                                onChange={onValueChange}  
+                                onBlur={(e)=>validateUrl(e)}/>
+                                {errors.attractionUrl?.isInvalid &&
+                                       <p className="text-danger">{errors.attractionUrl?.message}</p>
+                                   }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Description</label>
@@ -105,8 +148,11 @@ export const AttractionEdit = ({ countries }) => {
                                 aria-required="true"
                                 name='description'
                                 value={attraction.description}
-                                onChange={onValueChange} />
-                            <span className="text-danger"></span>
+                                onChange={onValueChange}  
+                                onBlur={(e) => minLength(e, 6)} />
+                                {errors.description?.isInvalid &&
+                                    <p className="text-danger">{errors.description?.message}</p>
+                                }
                         </div>
                         <div className="mb-3">
                             <input className="btn btn-primary" type="submit" value="Update" />

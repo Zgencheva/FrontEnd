@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import * as planService from '../../../services/planService.js';
 import * as attractionService from '../../../services/attractionService.js';
@@ -46,13 +46,13 @@ export const PlanDetails = () => {
             <ol>
                 {attractions?.map(attraction => <PlanAttractionsPartial key={attraction._id} attraction={attraction} onAttractionDelete={()=> onAttractionDelete(attraction._id)}/>)}
             </ol>
-            <p>See all attractions in {plan.city} <a>here</a></p>
+            <p>See all attractions in {plan.city} <Link to={`/${plan.city}/attraction`}>here</Link></p>
             <h3>Restaurants:</h3>
             <hr />
             {plan.restaurants?.length == 0 &&
                 <p>You have no restaurants yet.
                 </p>}
-            <p>See all restaurants in {plan.city} <a>here</a></p>
+            <p>See all restaurants in {plan.city} <Link to={`/${plan.city}/restaurant`}>here</Link></p>
             <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Delete plan
             </button>

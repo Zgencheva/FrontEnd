@@ -5,7 +5,6 @@ import { routes } from '../../../constants/routes.js';
 import styles from './Hero.module.css';
 
 export const Hero = ({ statistics , onSearch}) => {
-    const navigate = useNavigate();
     const [values, setValues] = useState({
         cityName: '',
         radioOption: 'attraction',
@@ -16,13 +15,7 @@ export const Hero = ({ statistics , onSearch}) => {
             [e.target.name]: e.target.value
         }));
     };
-    const submitHandler = (e) => {
-        e.preventDefault();
 
-        let values = Object.fromEntries(new FormData(e.target));
-        navigate(`/${values.cityName}/${values.radioOption}`);
-        console.log({...values});
-    };
     return (<div className={`bg ${styles.bg}`}>
         <div className={`text-center page-header ${styles.pageHeader} `}>
             <h1 className="display-4" style={{ color: 'white' }}>Welcome to Visit<span className="feature-icon"><i className="fa fa-mountain"></i></span>City</h1>
@@ -35,7 +28,12 @@ export const Hero = ({ statistics , onSearch}) => {
         </div>
         <form onSubmit={(e)=> onSearch(e)} className={`col-md-6 offset-md-3 ${styles.formStyle}`}>
             <div className={`form-group col-md-6 offset-md-3 ${styles.input}`}>
-                <input name="cityName" className="form-control" placeholder="City" value={values.cityName} onChange={changeHandler}/>
+                <input 
+                name="cityName" 
+                className="form-control" 
+                placeholder="City" 
+                value={values.cityName} 
+                onChange={changeHandler}/>
             </div>
             <fieldset className={`col-md-6 offset-md-4 ${styles.fieldsetStyle}`}>
                 <div className="form-check" style={{ color: 'white' }}>
@@ -45,7 +43,13 @@ export const Hero = ({ statistics , onSearch}) => {
                     </label>
                 </div>
                 <div className="form-check" style={{ color: 'white' }}>
-                    <input className="form-check-input" type="radio" name="radioOption" id="restaurant-radio-option" value="restaurant" onChange={changeHandler} checked={values.radioOption == 'restaurant'}/>
+                    <input 
+                    className="form-check-input" 
+                    type="radio" name="radioOption" 
+                    id="restaurant-radio-option" 
+                    value="restaurant" 
+                    onChange={changeHandler} 
+                    checked={values.radioOption == 'restaurant'}/>
                     <label className="form-check-label" htmlFor="exampleRadios2">
                         Restaurants
                     </label>
