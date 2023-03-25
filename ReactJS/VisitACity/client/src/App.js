@@ -21,6 +21,7 @@ import { CountryCreate } from './components/admin-section/countries/CountryCreat
 import { PrivateGuard } from './constants/PrivateGuard.js';
 import { Unauthorized } from './components/errors/Unauthorized.js';
 import { AdminGuard } from './constants/AdminGuard.js';
+import { RestaurantCreate } from './components/admin-section/restaurants/restaurant-create/RestaurantCreate.js';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -48,6 +49,7 @@ function App() {
             </Route>
             <Route element={<AdminGuard/>}>
               <Route path={routes['attraction-create']} element={<AttractionCreate countries={countries} />} />
+              <Route path={routes['restaurant-create']} element={<RestaurantCreate countries={countries} />} />
               <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
               <Route path={routes['country-create']} element={<CountryCreate countries={countries} />} />
               <Route path={routes['city-create']} element={<CityCreate countries={countries} />} />

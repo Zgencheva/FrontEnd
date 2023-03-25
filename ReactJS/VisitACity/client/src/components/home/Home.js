@@ -5,19 +5,17 @@ import styles from './Home.module.css';
 import { Hero } from './hero/Hero.js';
 import * as attractionService from '../../services/attractionService.js';
 import * as citiesService from '../../services/citiesService.js';
+import * as restaurantService from '../../services/restaurantService.js';
+
 
 export const Home = () => {
     const navigate = useNavigate();
 
     const {cityName, radioOption} = useParams();
-    console.log(cityName);
-    console.log(radioOption);
-    const [searchTerms, setsearchTerms] = useState({});
     const [heroStatistics, setHeroStatistics] = useState({});
     const [renderBody, setRenderBody] = useState([])
 
     useEffect(() => {
-        console.log('in use effect');
             attractionService.getAll()
             .then(attractions => {
                 setHeroStatistics(state => ({
@@ -40,6 +38,15 @@ export const Home = () => {
                     cities: Object.values(cities).length,
                 }));
             });
+
+            // restaurantService.getAll()
+            // .then(restaurants => {
+            //     setHeroStatistics(state => ({
+            //         ...state,
+            //         restaurants: Object.values(restaurants).length,
+            //     }));
+            // });
+
     }, [cityName, radioOption]);
 
     const onSearch = (e) => {

@@ -6,6 +6,7 @@ export const routes = {
     'attraction-details': '/attractions/:attractionId',
     'attraction-edit': '/admin/attractions/edit/:attractionId',
     'attraction-create': '/admin/attractions/create',
+    'restaurant-create': '/admin/restaurants/create',
     'plan-details': '/myPlans/:planId',
     'login': '/login',
     'register': '/register',

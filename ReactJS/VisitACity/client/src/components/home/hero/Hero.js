@@ -71,7 +71,7 @@ export const Hero = ({ statistics , onSearch}) => {
                 </div>
                 <div className={`col-sm ${styles.colsm}`}>
                     <div className="feature-icon">
-                        <i className="fa fa-utensils"></i> <span>0 Restaurants</span>
+                        <i className="fa fa-utensils"></i> <span>{statistics.restaurants} Restaurants</span>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,7 @@ export const Admin = () =>{
   </button>
   <ul className="dropdown-menu">
     <Link to={routes["attraction-create"]} className="dropdown-item" href="#">Create attraction</Link>
+    <Link to={routes["restaurant-create"]} className="dropdown-item" href="#">Create restaurant</Link>
     <Link to={routes["city-create"]} className="dropdown-item" href="#">Create city</Link>
     <Link to={routes["country-create"]} className="dropdown-item" href="#">Create country</Link>
   </ul>

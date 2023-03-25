@@ -18,7 +18,6 @@ export const createAttraction = async (attractionData) => {
 }
 
 export const editAttraction = async (attractionId, attractionData) => {
-console.log(attractionData);
   const result = await requester(`${baseUrl}/${attractionId}`,'put', attractionData, false, false)
   return result;
 }
