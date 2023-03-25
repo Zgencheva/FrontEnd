@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { routes } from '../../../constants/routes.js';
 import styles from './Hero.module.css';
 
-export const Hero = ({ statistics }) => {
+export const Hero = ({ statistics , onSearch}) => {
     const navigate = useNavigate();
     const [values, setValues] = useState({
         cityName: '',
@@ -33,7 +33,7 @@ export const Hero = ({ statistics }) => {
             <br />
             <h3 className="display-12" style={{ color: 'white' }}>Where are you travelling to?</h3>
         </div>
-        <form onSubmit={submitHandler} className={`col-md-6 offset-md-3 ${styles.formStyle}`}>
+        <form onSubmit={(e)=> onSearch(e)} className={`col-md-6 offset-md-3 ${styles.formStyle}`}>
             <div className={`form-group col-md-6 offset-md-3 ${styles.input}`}>
                 <input name="cityName" className="form-control" placeholder="City" value={values.cityName} onChange={changeHandler}/>
             </div>
