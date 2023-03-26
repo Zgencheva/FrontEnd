@@ -18,6 +18,7 @@ export const RestaurantCreate = ({ countries }) => {
 
     const onFormSubmit = async (e) => {
         e.preventDefault();
+        console.log(values);
         const data = {
             ...values,
             comments: [],
@@ -26,7 +27,7 @@ export const RestaurantCreate = ({ countries }) => {
             data.image = await saveImageToCloudinary(selectedImage);
         }
         await restaurantService.create(data)
-            .then(res => navigate(`/restaurants/${res._id}`));
+            .then(res => navigate(`/`));
     }
     const renderCities = (e) => {
         let id = e.target.value;

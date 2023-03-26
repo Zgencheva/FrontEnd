@@ -6,9 +6,14 @@ export const getAll = async () => {
     const result = await requester(baseUrl, 'get', undefined, false, false);
     return result;
   }
-  
+  export const getAllRestaurantsByCity = async (city) => {
+    const match = encodeURIComponent(`city="${city}"`);
+
+    const result = await requester(`${baseUrl}?where=${match}`, 'get', undefined, true, false);
+    return result;
+  }
   export const getById = async (id) => {
-    const result = await requester(`${baseUrl}/${id}`, 'get', undefined, false, false);
+    const result = await requester(`${baseUrl}/${id}`, 'get', undefined, true, false);
     return result;
   }
   

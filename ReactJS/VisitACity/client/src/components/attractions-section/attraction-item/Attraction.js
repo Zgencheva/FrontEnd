@@ -24,10 +24,10 @@ export const Attraction = ({ attraction }) => {
                 <div className={`card-text feature-icon ${styles.cardBody}`}>
                     <i className="fa fa-eye"></i>
 
-                    {attraction.userReviews.length == 1 &&
+                    {attraction.userReviews?.length == 1 &&
                         <span>Revied by 1 adventurer</span>
                     }
-                    {attraction.userReviews.length != 1 &&
+                    {attraction.userReviews?.length != 1 &&
                         <span>Revied by {attraction.userReviews.length} adventurers</span>
                     }
                 </div>
