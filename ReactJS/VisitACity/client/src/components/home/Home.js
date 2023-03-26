@@ -13,27 +13,29 @@ import * as restaurantService from '../../services/restaurantService.js';
 export const Home = () => {
     const navigate = useNavigate();
 
-    const {cityName, radioOption} = useParams();
+    const { cityName, radioOption } = useParams();
     const [heroStatistics, setHeroStatistics] = useState({});
+    const [attractions, setAttractions] = useState([]);
+    const [restaurants, setRestaurants] = useState([]);
     const [renderAttractions, setRenderAttraction] = useState([]);
     const [renderRestaurants, setRenderRestaurants] = useState([]);
 
     useEffect(() => {
-            attractionService.getAll()
+        attractionService.getAll()
             .then(attractions => {
                 setHeroStatistics(state => ({
                     ...state,
                     attractions: Object.values(attractions).length,
                 }));
-                if(radioOption === 'attraction'){
-                    setRenderAttraction(Object.values(attractions).filter(x=> x.city === cityName));
+                setAttractions(Object.values(attractions));
+                if (radioOption === 'attraction') {
+                    setRenderAttraction(Object.values(attractions).filter(x => x.city === cityName));
                 }
-                else{
+                else {
                     setRenderAttraction(Object.values(attractions));
                 }
-                
+
             });
-        
         citiesService.getAll()
             .then(cities => {
                 setHeroStatistics(state => ({
@@ -42,18 +44,30 @@ export const Home = () => {
                 }));
             });
 
-            restaurantService.getAll()
+        restaurantService.getAll()
             .then(restaurants => {
                 setHeroStatistics(state => ({
                     ...state,
                     restaurants: Object.values(restaurants).length,
                 }));
-                if(radioOption === 'restaurant'){
-                    console.log('in restaurant');
-                    setRenderRestaurants(Object.values(restaurants).filter(x=> x.city === cityName));
+                setRestaurants(restaurants);
+                if (radioOption === 'restaurant') {
+                    setRenderRestaurants(Object.values(restaurants).filter(x => x.city === cityName));
                 }
             });
 
+    }, []);
+
+    useEffect(() => {
+        if (radioOption === 'attraction') {
+            setRenderAttraction(attractions?.filter(x => x.city === cityName));
+        }
+        if (radioOption === 'restaurant') {
+            setRenderRestaurants(restaurants?.filter(x => x.city === cityName));
+        }
+        if(!radioOption){
+            setRenderAttraction(attractions);
+        }
     }, [cityName, radioOption]);
 
     const onSearch = (e) => {
@@ -65,14 +79,13 @@ export const Home = () => {
 
     return (
         <main role="main" className="pb-3">
-            <Hero statistics={heroStatistics} onSearch={onSearch}/>
+            <Hero statistics={heroStatistics} onSearch={onSearch} />
             <div className={`container ${styles.container}`}>
-                {radioOption === 'restaurant' ? 
-                <RestaurantList data={renderRestaurants}/>
+                {radioOption === 'restaurant' ?
+                    <RestaurantList data={renderRestaurants} />
                     :
-                <AttractionsList data={renderAttractions} />
+                    <AttractionsList data={renderAttractions} />
                 }
-               
             </div>
         </main>
     );
