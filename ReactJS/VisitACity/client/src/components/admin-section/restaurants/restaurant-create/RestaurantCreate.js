@@ -25,7 +25,8 @@ export const RestaurantCreate = ({ countries }) => {
             comments: [],
         }
         if (selectedImage != null) {
-            data.image = await saveImageToCloudinary(selectedImage);
+            // data.image = await saveImageToCloudinary(selectedImage);
+            data.image = "https://res.cloudinary.com/dllgr6ope/image/upload/v1679918510/xshq17zgkrmhbjtbl61z.jpg"
         }
         await restaurantService.create(data)
             .then(res => navigate(`/restaurants/${res._id}`));
