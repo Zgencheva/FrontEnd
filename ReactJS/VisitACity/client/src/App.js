@@ -22,6 +22,7 @@ import { PrivateGuard } from './constants/PrivateGuard.js';
 import { Unauthorized } from './components/errors/Unauthorized.js';
 import { AdminGuard } from './constants/AdminGuard.js';
 import { RestaurantCreate } from './components/admin-section/restaurants/restaurant-create/RestaurantCreate.js';
+import { RestaurantDetails } from './components/restaurants-section/restaurant-details/RestaurantDetails.js';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -41,6 +42,7 @@ function App() {
             <Route path={routes.home} element={<Home />} />
             <Route path={routes.homeWithQuery} element={<Home />} />
             <Route path={routes['attraction-details']} element={<AttractionDetails />} />
+            <Route path={routes['restaurant-details']} element={<RestaurantDetails />} />
             <Route element={<PrivateGuard />}>
               <Route path={routes['plan-details']} element={<PlanDetails />} />
               <Route path={routes.createPlan} element={<CreatePlan countries={countries} />} />

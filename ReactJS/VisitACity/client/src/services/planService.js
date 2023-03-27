@@ -37,11 +37,36 @@ export const addAttractionToPlan = async (attraction) => {
   return result;
 }
 
+export const addRestaurantToPlan = async (restaurant) =>{
+  const userPlans = await getUserPlans();
+  const currentPlan = userPlans.find(x => x.city == restaurant.city);
+  console.log(currentPlan);
+  if (!currentPlan) {
+    throw new Error(`You do not have plans in ${restaurant.city}`)
+  }
+  if (currentPlan.restaurants.some(x => x == restaurant._id)) {
+    throw new Error(`You already have ${restaurant.name} in your plan to ${restaurant.city}`)
+  }
+  currentPlan.restaurants.push(restaurant._id);
+  const result = await updatePlan(currentPlan);
+  return result;
+
+}
+
 export const deleteAttractionFromPlan = async (planId, attractionId) => {
   const currentPlan = await getById(planId);
   console.log(currentPlan);
 
   currentPlan.attractions = currentPlan.attractions.filter(x => x != attractionId);
+  const result = await updatePlan(currentPlan);
+  return result;
+}
+
+export const deleteRestaurantFromPlan = async (planId, restaurantId) => {
+  const currentPlan = await getById(planId);
+  console.log(currentPlan);
+
+  currentPlan.restaurants = currentPlan.restaurants.filter(x => x != restaurantId);
   const result = await updatePlan(currentPlan);
   return result;
 }

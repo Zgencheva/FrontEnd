@@ -23,11 +23,11 @@ export const getAll = async () => {
   }
   
   export const edit = async (id, data) => {
-    const result = await requester(`${baseUrl}/${id}`,'put', data, false, false)
+    const result = await requester(`${baseUrl}/${id}`,'put', data, true, false)
     return result;
   }
   
   export const deleteData = async (id) => {
-    await requester(`${baseUrl}/${id}`,'delete', undefined, false, true)
+    await requester(`${baseUrl}/${id}`,'delete', undefined, true, true)
   }
   
