@@ -45,7 +45,7 @@ export const RestaurantDetails = () => {
     return (
         <section className="restaurant-details">
             <div className="card mb-3">
-                <a href="@Model.Url">
+                <a>
                     <img width="300px" height="500px" src={restaurant?.image} className="card-img-top" alt="Restaurant img"/>
                 </a>
                 <div className="card-body">
