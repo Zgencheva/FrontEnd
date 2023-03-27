@@ -50,6 +50,7 @@ export const PlanDetails = () => {
     return (
         <section id="plan">
             <h1 className='text-center'>Welcome to your plan TO {plan.city}!</h1>
+            <h1 className='text-center'>Welcome to your plan TO {plan.city}!</h1>
             <h3>Attractions:</h3>
             <hr />
             {plan.attractions?.length == 0 &&
