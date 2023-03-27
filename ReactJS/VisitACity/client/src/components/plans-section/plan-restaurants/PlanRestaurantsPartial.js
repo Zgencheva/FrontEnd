@@ -5,6 +5,7 @@ export const PlanRestaurantsPartial = ({ restaurant, onRestaurantDelete }) => {
 
     return (
         <div>
+            <h1>Hi</h1>
             <li className={`list-group-item d-flex justify-content-between align-items-start ${styles.plan}`}>
                 <div className={`ms-2 me-auto ${styles['plan-first']}`}>
                     <div className="fw-bold">{restaurant.name}</div>
