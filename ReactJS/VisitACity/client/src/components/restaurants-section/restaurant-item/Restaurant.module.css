@@ -1,0 +1,10 @@
+.card{
+    flex: 0 0 30%;
+    box-shadow: 1px 1px 100px 1px #888888;
+}
+.cardBody{
+    padding-left: 20px;
+}
+.cardFooter{
+    padding-bottom: 10px;
+}

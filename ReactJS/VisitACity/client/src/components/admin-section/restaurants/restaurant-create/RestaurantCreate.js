@@ -21,13 +21,14 @@ export const RestaurantCreate = ({ countries }) => {
         console.log(values);
         const data = {
             ...values,
+            rating: 0,
             comments: [],
         }
         if (selectedImage != null) {
             data.image = await saveImageToCloudinary(selectedImage);
         }
         await restaurantService.create(data)
-            .then(res => navigate(`/`));
+            .then(res => navigate(`/restaurants/${res._id}`));
     }
     const renderCities = (e) => {
         let id = e.target.value;
