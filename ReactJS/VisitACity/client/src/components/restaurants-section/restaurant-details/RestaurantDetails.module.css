@@ -1,0 +1,15 @@
+.star{
+    color: rgb(246, 239, 37);
+}
+.btns{
+    display: block;
+    align-items: center;
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    margin: 10px;
+    padding: unset;
+}
+.input {
+    text-decoration: none;
+}
