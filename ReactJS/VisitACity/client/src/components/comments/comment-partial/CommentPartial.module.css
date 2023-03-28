@@ -1,0 +1,13 @@
+.li-comment{
+    background-color: azure;
+    list-style: none;
+    padding: 10px;
+    border: 1px solid lightblue;
+    margin: 10px;
+}
+.x-comments{
+    display: inline-block;
+}
+.star{
+    color: #ffe234;
+}

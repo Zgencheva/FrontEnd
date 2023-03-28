@@ -22,9 +22,9 @@ export const deleteComment = async (id) => {
 export const getRestaurantComments = async (restaurantId) => {
   const userId = JSON.parse(localStorage.getItem('user'))?._id;
 
-  const match = encodeURIComponent(`_restaurantId="${restaurantId}"`);
+  const match = encodeURIComponent(`restaurantId="${restaurantId}"`);
 
-  const result = await requester(`${baseUrl}?where=${match}`, 'get', undefined, true, false);
+  const result = await requester(`${baseUrl}?where=${match}`, 'get', undefined, false, false);
 
   return result;
 }

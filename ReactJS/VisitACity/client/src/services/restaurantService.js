@@ -13,7 +13,7 @@ export const getAll = async () => {
     return result;
   }
   export const getById = async (id) => {
-    const result = await requester(`${baseUrl}/${id}`, 'get', undefined, true, false);
+    const result = await requester(`${baseUrl}/${id}`, 'get', undefined, false, false);
     return result;
   }
   
