@@ -47,13 +47,13 @@ export const RestaurantDetails = () => {
             navigate(`/myPlans/${res._id}`);
         }
     }
-    const getRatingContent = rating => {
-        let content = [];
-        for (let i = 0; i <= rating; i++) {
-            content.push(<i key={i} className={`fa fa-star ${styles.star}`}></i>);
-        }
-        return content;
-    };
+    // const getRatingContent = rating => {
+    //     let content = [];
+    //     for (let i = 0; i < rating; i++) {
+    //         content.push(<i key={i} className={`fa fa-star ${styles.star}`}></i>);
+    //     }
+    //     return content;
+    // };
     const onCommentSubmitHandler = async (e) => {
         e.preventDefault();
         console.log('in form');
@@ -68,6 +68,7 @@ export const RestaurantDetails = () => {
         setComments(state => [...state, res])});
     }
     console.log(comments);
+    console.log(restaurant.rating);
     return (
         <section className="restaurant-details">
             <div className="card mb-3">
@@ -81,7 +82,7 @@ export const RestaurantDetails = () => {
                     <p className="card-text text-center">
                         <div className="ratings text-center">
                             <div className="stars">
-                                {getRatingContent(restaurant?.rating)}
+                                {/* {getRatingContent(restaurant?.rating)} */}
                             </div>
                         </div>
                     </p>

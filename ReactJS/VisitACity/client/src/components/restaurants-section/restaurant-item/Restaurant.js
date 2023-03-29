@@ -3,13 +3,13 @@ import { routes } from '../../../constants/routes.js';
 import styles from './Restaurant.module.css';
 
 export const Restaurant = ({ restaurant }) => {
-    const getRatingContent = rating => {
-        let content = [];
-        for (let i = 0; i <= rating ; i++) {
-          content.push(<i key={i} className={`fa fa-star ${styles.star}`}></i>);
-        }
-        return content;
-      };
+    // const getRatingContent = rating => {
+    //     let content = [];
+    //     for (let i = 0; i < rating ; i++) {
+    //       content.push(<i key={i} className={`fa fa-star ${styles.star}`}></i>);
+    //     }
+    //     return content;
+    //   };
     return (
         <div className={`media col-md-4 ${styles.card}`}>
             <Link to={`/restaurants/${restaurant._id}`}>
@@ -26,7 +26,7 @@ export const Restaurant = ({ restaurant }) => {
 
             </div>
             <div className="card-footer">
-                <div className="d-flex justify-content-center">
+                {/* <div className="d-flex justify-content-center">
                     <div className="content text-center">
                         <div className="ratings">
                             <span className="product-rating">{restaurant.rating}</span><span>/5</span>
@@ -35,7 +35,7 @@ export const Restaurant = ({ restaurant }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="text-center">
                     <Link to={`/restaurants/${restaurant._id}`} className={`btn btn-info`}>

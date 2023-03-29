@@ -1,4 +1,5 @@
 import { requester } from "../helpers/requester.js";
+import * as restaurantService from './restaurantService.js';
 
 const baseUrl = 'http://localhost:3030/data/comments';
 
@@ -9,11 +10,10 @@ export const getById = async (id) => {
 }
 
 export const create = async (data) => {
-    //TODO: logic here....
   const result = await requester(baseUrl, 'post', data, true, false);
+  console.log(result);
   return result;
 }
-
 
 export const deleteComment = async (id) => {
   await requester(`${baseUrl}/${id}`, 'delete', undefined, true, true);
