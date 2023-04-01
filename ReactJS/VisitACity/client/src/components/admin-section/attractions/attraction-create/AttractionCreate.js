@@ -4,6 +4,7 @@ import * as attractionService from '../../../../services/attractionService.js';
 import styles from './AttractionCreate.module.css';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
 import { useForm } from '../../../../hooks/useForm.js';
+import { ValidateImage } from '../../../../helpers/validateImage.js';
 
 export const AttractionCreate = ({ countries }) => {
     const navigate = useNavigate();
@@ -26,11 +27,23 @@ export const AttractionCreate = ({ countries }) => {
             userReviews: [],
 
         }
-        if (selectedImage != null) {
+
+        if(ValidateImage(selectedImage)=== true){
             attraction.image = await saveImageToCloudinary(selectedImage);
+            await attractionService.createAttraction(attraction)
+                .then(res => navigate(`/attractions/${res._id}`));
         }
-        await attractionService.createAttraction(attraction)
-            .then(res => navigate(`/attractions/${res._id}`));
+        else{
+            setError(state => ({
+                ...state,
+                ['image']: {
+                    isInvalid: true,
+                    message: `Image extension is not allowed!`
+                },
+    
+            }))
+        }
+        
     }
     const renderCities = (e) => {
         let id = e.target.value;
@@ -141,7 +154,9 @@ export const AttractionCreate = ({ countries }) => {
                                 aria-required="true"
                                 name='image'
                                 onChange={(e) => setSelectedImage(e.target.files[0])} />
-                            <span className="text-danger"></span>
+                             {errors.image?.isInvalid &&
+                                    <p className="text-danger">{errors.image?.message}</p>
+                                }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Address</label>

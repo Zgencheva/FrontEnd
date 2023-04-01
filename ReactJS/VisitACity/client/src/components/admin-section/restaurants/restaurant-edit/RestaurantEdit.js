@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import * as restaurantService from '../../../../services/restaurantService.js';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
+import { ValidateImage } from '../../../../helpers/validateImage.js';
 
 export const RestaurantEdit = ({ countries }) => {
     const navigate = useNavigate();
@@ -26,8 +27,19 @@ export const RestaurantEdit = ({ countries }) => {
     };
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        if (selectedImage != null) {
-            restaurant.image = await saveImageToCloudinary(selectedImage)
+        if (selectedImage) {
+            if (ValidateImage(selectedImage) === false) {
+                setError(state => ({
+                    ...state,
+                    ['image']: {
+                        isInvalid: true,
+                        message: `Image extension is not allowed!`
+                    },
+
+                }))
+                return;
+            }
+            restaurant.image = await saveImageToCloudinary(selectedImage);
         }
         setRestaurant(restaurant)
         await restaurantService.edit(restaurantId, restaurant);
@@ -78,7 +90,9 @@ export const RestaurantEdit = ({ countries }) => {
                                 aria-required="true"
                                 name='image'
                                 onChange={(e) => setSelectedImage(e.target.files[0])} />
-                            <span className="text-danger"></span>
+                            {errors.image?.isInvalid &&
+                                <p className="text-danger">{errors.image?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Address</label>
@@ -87,7 +101,7 @@ export const RestaurantEdit = ({ countries }) => {
                                 aria-required="true"
                                 name="address"
                                 value={restaurant.address}
-                                onChange={onValueChange} 
+                                onChange={onValueChange}
                                 onBlur={(e) => minLength(e, 6)} />
                             {errors.address?.isInvalid &&
                                 <p className="text-danger">{errors.address?.message}</p>
@@ -102,9 +116,9 @@ export const RestaurantEdit = ({ countries }) => {
                                 value={restaurant.phoneNumber}
                                 onChange={onValueChange}
                                 onBlur={(e) => minLength(e, 3)} />
-                                {errors.phoneNumber?.isInvalid &&
-                                    <p className="text-danger">{errors.phoneNumber?.message}</p>
-                                }
+                            {errors.phoneNumber?.isInvalid &&
+                                <p className="text-danger">{errors.phoneNumber?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Restaurant Url</label>
@@ -113,11 +127,11 @@ export const RestaurantEdit = ({ countries }) => {
                                 aria-required="true"
                                 name="restaurantUrl"
                                 value={restaurant.restaurantUrl}
-                                onChange={onValueChange}  
-                                onBlur={(e)=>validateUrl(e)}/>
-                                {errors.restaurantUrl?.isInvalid &&
-                                       <p className="text-danger">{errors.restaurantUrl?.message}</p>
-                                   }
+                                onChange={onValueChange}
+                                onBlur={(e) => validateUrl(e)} />
+                            {errors.restaurantUrl?.isInvalid &&
+                                <p className="text-danger">{errors.restaurantUrl?.message}</p>
+                            }
                         </div>
                         <div className="mb-3">
                             <input className="btn btn-primary" type="submit" value="Update" />

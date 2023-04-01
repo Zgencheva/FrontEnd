@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import * as attractionService from '../../../../services/attractionService.js';
 import styles from './AttractionEdit.module.css';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
+import { ValidateImage } from '../../../../helpers/validateImage.js';
 
 export const AttractionEdit = ({ countries }) => {
     const navigate = useNavigate();
@@ -27,7 +28,18 @@ export const AttractionEdit = ({ countries }) => {
     };
     const onFormSubmit = async (e) => {
         e.preventDefault();
-        if (selectedImage != null) {
+        if (selectedImage) {
+            if(ValidateImage(selectedImage) === false){
+                setError(state => ({
+                    ...state,
+                    ['image']: {
+                        isInvalid: true,
+                        message: `Image extension is not allowed!`
+                    },
+        
+                }))
+                return;
+            }
             attraction.image = await saveImageToCloudinary(selectedImage)
         }
         setAttraction(attraction)
@@ -113,7 +125,9 @@ export const AttractionEdit = ({ countries }) => {
                                 aria-required="true"
                                 name='image'
                                 onChange={(e) => setSelectedImage(e.target.files[0])} />
-                            <span className="text-danger"></span>
+                             {errors.image?.isInvalid &&
+                                    <p className="text-danger">{errors.image?.message}</p>
+                                }
                         </div>
                         <div className="mb-3">
                             <label className="form-label">Address</label>
