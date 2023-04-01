@@ -23,24 +23,14 @@ export const Restaurant = ({ restaurant }) => {
                     <i className="fa fa-search-location"></i> <span>Address: {restaurant.address}</span>
                 </div>
                 <p></p>
-
-            </div>
-            <div className="card-footer">
-                {/* <div className="d-flex justify-content-center">
-                    <div className="content text-center">
-                        <div className="ratings">
-                            <span className="product-rating">{restaurant.rating}</span><span>/5</span>
-                            <div className="stars">
-                               {getRatingContent(Number(restaurant.rating))}
-                            </div>
-                        </div>
-                    </div>
-                </div> */}
+                <div className={`card-text feature-icon ${styles.cardBody}`}>
+                    <i className="fa fa-search-location"></i> <span>Phone: {restaurant.phoneNumber}</span>
+                </div>
             </div>
             <div className="text-center">
-                    <Link to={`/restaurants/${restaurant._id}`} className={`btn btn-info`}>
-                        <i className="fa fa-info-circle"></i> <span>Details</span>
-                    </Link>
+                <Link to={`/restaurants/${restaurant._id}`} className={`btn btn-info`}>
+                    <i className="fa fa-info-circle"></i> <span>Details</span>
+                </Link>
                 {/* <a className="btn btn-success">
                     <div className="feature-icon">
                         <i className="fa fa-bus"></i> <span>Add to plan</span>

@@ -78,7 +78,8 @@ export const RestaurantDetails = () => {
                 <div className="card-body">
                     <h1 className="card-title text-center">{restaurant?.name}</h1>
                     <h3 className="card-title text-center">Address: {restaurant?.address}</h3>
-                    <h3 className="card-text text-center">Phone: {restaurant?.address}</h3>
+                    <h3 className="card-text text-center">Phone: {restaurant?.phoneNumber}</h3>
+                    <h3 className="card-text text-center">Visit official website <a target="_blank" href={restaurant?.restaurantUrl}>here</a></h3>
                     <p className="card-text text-center">
                         <div className="ratings text-center">
                             <div className="stars">
