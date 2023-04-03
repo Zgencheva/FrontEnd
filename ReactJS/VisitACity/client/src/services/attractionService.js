@@ -1,29 +1,30 @@
 import { requester } from "../helpers/requester.js";
+import { baseUrl } from "../config.js";
 
-const baseUrl = 'http://localhost:3030/jsonstore/attractions';
+const url = `${baseUrl}/jsonstore/attractions`;
 
 export const getAll = async () => {
-  const result = await requester(baseUrl, 'get', undefined, false, false);
+  const result = await requester(url, 'get', undefined, false, false);
   return result;
 }
 
 export const getById = async (attractionId) => {
-  const result = await requester(`${baseUrl}/${attractionId}`, 'get', undefined, false, false);
+  const result = await requester(`${url}/${attractionId}`, 'get', undefined, false, false);
   return result;
 }
 
 export const createAttraction = async (attractionData) => {
-  const result = await requester(baseUrl, 'post', attractionData, true, false);
+  const result = await requester(url, 'post', attractionData, true, false);
   return result;
 }
 
 export const editAttraction = async (attractionId, attractionData) => {
-  const result = await requester(`${baseUrl}/${attractionId}`,'put', attractionData, false, false)
+  const result = await requester(`${url}/${attractionId}`,'put', attractionData, false, false)
   return result;
 }
 
 export const deleteAttraction = async (attractionId) => {
-  await requester(`${baseUrl}/${attractionId}`,'delete', undefined, false, true)
+  await requester(`${url}/${attractionId}`,'delete', undefined, false, true)
 }
 
 export const addUserReview = async (attractionId, userId) =>{

@@ -1,22 +1,23 @@
 import { requester } from "../helpers/requester.js";
 import * as restaurantService from './restaurantService.js';
+import { baseUrl } from "../config.js";
 
-const baseUrl = 'http://localhost:3030/data/comments';
+const url = `${baseUrl}/data/comments`;
 
 export const getById = async (id) => {
-  const result = await requester(`${baseUrl}/${id}`, 'get', undefined, true, false);
+  const result = await requester(`${url}/${id}`, 'get', undefined, true, false);
   console.log(result);
   return result;
 }
 
 export const create = async (data) => {
-  const result = await requester(baseUrl, 'post', data, true, false);
+  const result = await requester(url, 'post', data, true, false);
   console.log(result);
   return result;
 }
 
 export const deleteComment = async (id) => {
-  await requester(`${baseUrl}/${id}`, 'delete', undefined, true, true);
+  await requester(`${url}/${id}`, 'delete', undefined, true, true);
 }
 
 export const getRestaurantComments = async (restaurantId) => {
@@ -24,7 +25,7 @@ export const getRestaurantComments = async (restaurantId) => {
 
   const match = encodeURIComponent(`restaurantId="${restaurantId}"`);
 
-  const result = await requester(`${baseUrl}?where=${match}`, 'get', undefined, false, false);
+  const result = await requester(`${url}?where=${match}`, 'get', undefined, false, false);
 
   return result;
 }

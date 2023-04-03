@@ -1,9 +1,10 @@
 import { requester } from "../helpers/requester.js";
+import { baseUrl } from "../config.js";
 
-const baseUrl = 'http://localhost:3030/data/plans';
+const url = `${baseUrl}/data/plans`;
 
 export const getById = async (planId) => {
-  const result = await requester(`${baseUrl}/${planId}`, 'get', undefined, true, false);
+  const result = await requester(`${url}/${planId}`, 'get', undefined, true, false);
   console.log(result);
   return result;
 }
@@ -13,11 +14,11 @@ export const createPlan = async (planData) => {
   if (userPlans.some(x => x.city == planData.city)) {
     throw new Error(`You already have plan in ${planData.city}`)
   }
-  const result = await requester(baseUrl, 'post', planData, true, false);
+  const result = await requester(url, 'post', planData, true, false);
   return result;
 }
 export const updatePlan = async (planData) => {
-  const result = await requester(`${baseUrl}/${planData._id}`, 'put', planData, true, false);
+  const result = await requester(`${url}/${planData._id}`, 'put', planData, true, false);
   return result;
 }
 export const addAttractionToPlan = async (attraction) => {
@@ -65,7 +66,7 @@ export const deleteRestaurantFromPlan = async (planId, restaurantId) => {
 }
 
 export const deletePlan = async (planId) => {
-  await requester(`${baseUrl}/${planId}`, 'delete', undefined, true, true);
+  await requester(`${url}/${planId}`, 'delete', undefined, true, true);
 }
 
 export const getUserPlans = async () => {
@@ -73,7 +74,7 @@ export const getUserPlans = async () => {
 
   const match = encodeURIComponent(`_ownerId="${userId}"`);
   try {
-    const result = await requester(`${baseUrl}?where=${match}`, 'get', undefined, true, false);
+    const result = await requester(`${url}?where=${match}`, 'get', undefined, true, false);
     return result;
   } catch (error) {
     return [];

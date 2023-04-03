@@ -1,38 +1,36 @@
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import {rest} from 'msw';
+import {setupServer} from 'msw/node';
+import '@testing-library/jest-dom';
 import { Attraction } from './Attraction.js';
 import { BrowserRouter } from 'react-router-dom';
+import { testAttraction } from '../../../constants/TestConstants.js';
 
 describe('Attraction component', () => {
-    const testAttraction = {
-        "_id": "62cde487-6b82-468f-bdbf-fcfe2d7c779b",
-        "name": "Dolphinarium",
-        "address": "Saltanat primorski park",
-        "attractionUrl": "https://dolphinariumvarna.bg/",
-        "type": "DayTours",
-        "price": 25,
-        "city": "Varna",
-        "country": "Bulgaria",
-        "image": "https://res.cloudinary.com/dllgr6ope/image/upload/v1678911306/62cde487-6b82-468f-bdbf-fcfe2d7c779b_vajldw.jpg",
-        "description": "Yes, you can swim with dolphins. Dolphins can have fun.",
-        "userReviews": []
-    }
-    const testAttractionId = "62cde487-6b82-468f-bdbf-fcfe2d7c779b";
 
-    test('Show name', () => {
+    it('Show attraction card details', () => {
 
         render(<BrowserRouter>
             <Attraction attraction={testAttraction} />
         </BrowserRouter>);
 
-        expect(screen.queryByText(testAttraction.name)).toBeInTheDocument();
+        expect(screen.getByText(testAttraction.name)).toBeInTheDocument();
     });
-    test('Click info should redirect to attraction details', async () => {
+    it('Show attraction city details', () => {
 
         render(<BrowserRouter>
             <Attraction attraction={testAttraction} />
         </BrowserRouter>);
-        await userEvent.click(screen.queryByText('Details'));
-        expect(document.location.pathname).toContain(`/attractions/${testAttractionId}`);
+
+        expect(screen.queryByText(testAttraction.city)).toBeInTheDocument();
+    });
+    it('Click Details should redirect to attraction details', async () => {
+
+        render(<BrowserRouter>
+            <Attraction attraction={testAttraction} />
+        </BrowserRouter>);
+        userEvent.click(screen.queryByText('Details'));
+        expect(document.location.pathname).toContain(`/attractions/${testAttraction._id}`);
     })
 })

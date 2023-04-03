@@ -1,13 +1,15 @@
 import { requester } from "../helpers/requester.js";
-const baseUrl = 'http://localhost:3030/jsonstore/countries';
+import { baseUrl } from "../config.js";
+
+const url = `${baseUrl}/jsonstore/countries`;
 
 export const getAll = async () => {
-  const result = await requester(baseUrl, 'get', undefined, false, false);
+  const result = await requester(url, 'get', undefined, false, false);
   return result;
 }
 
 export const getById = async (countryId) => {
-  const result = await requester(`${baseUrl}/${countryId}`, 'get', undefined, false, false);
+  const result = await requester(`${url}/${countryId}`, 'get', undefined, false, false);
   return result;
 }
 
@@ -15,12 +17,12 @@ export const createCountry = async (countryData, countries) => {
   if(countries.some(x=> x.name == countryData.name)){
     throw new Error(`There is already country with this name`);
   }
-  const result = await requester(`${baseUrl}`, 'post', countryData, false, false)
+  const result = await requester(`${url}`, 'post', countryData, false, false)
   return result;
 }
 
-export const deleteCountry = async (countryId) => {
-  await requester(`${baseUrl}/${countryId}`, 'delete', undefined, false, true)
+export const deleteCountry = async (id) => {
+  await requester(`${url}/${id}`, 'delete', undefined, false, true)
 }
 
 export const addCity = async (values, countries) => {
@@ -29,6 +31,6 @@ export const addCity = async (values, countries) => {
     throw new Error(`There is a city with the same name in ${values.country}`)
   }
   country.cities.push(values.city);
-  const result = await requester(`${baseUrl}/${country._id}`, 'post', country, false, false);
+  const result = await requester(`${url}/${country._id}`, 'post', country, false, false);
   return result;
 }

@@ -24,6 +24,7 @@ import { AdminGuard } from './constants/AdminGuard.js';
 import { RestaurantCreate } from './components/admin-section/restaurants/restaurant-create/RestaurantCreate.js';
 import { RestaurantDetails } from './components/restaurants-section/restaurant-details/RestaurantDetails.js';
 import { RestaurantEdit } from './components/admin-section/restaurants/restaurant-edit/RestaurantEdit.js';
+import { PublicOnlyGuard } from './constants/PublicOnlyGuard.js';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -50,16 +51,18 @@ function App() {
               <Route path={routes.myPlans} element={<MyPlans />} />
               <Route path={routes.logout} element={<Logout />} />
             </Route>
-            <Route element={<AdminGuard/>}>
+            <Route element={<AdminGuard />}>
               <Route path={routes['attraction-create']} element={<AttractionCreate countries={countries} />} />
               <Route path={routes['restaurant-create']} element={<RestaurantCreate countries={countries} />} />
               <Route path={routes['attraction-edit']} element={<AttractionEdit countries={countries} />} />
               <Route path={routes['restaurant-edit']} element={<RestaurantEdit countries={countries} />} />
               <Route path={routes['country-create']} element={<CountryCreate countries={countries} />} />
               <Route path={routes['city-create']} element={<CityCreate countries={countries} />} />
-              /</Route>
-            <Route path={routes.login} element={<Login />} />
-            <Route path={routes.register} element={<Register />} />
+            </Route>
+            <Route element={<PublicOnlyGuard />}>
+              <Route path={routes.login} element={<Login />} />
+              <Route path={routes.register} element={<Register />} />
+            </Route>
             <Route path={routes.unauthorized} element={<Unauthorized />} />
           </Routes>
         </main>
