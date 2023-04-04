@@ -38,7 +38,8 @@ export const Login = () => {
                 <input 
                 type="email" 
                 className="form-control"
-                 id="exampleInputEmail1" 
+                 id="exampleInputEmail1"
+                 placeholder="Enter email"
                  aria-describedby="emailHelp"
                  name="email"
                  value={values.email}
@@ -55,6 +56,7 @@ export const Login = () => {
                 type="password" 
                 className="form-control" 
                 id="exampleInputPassword1"
+                placeholder="Password"
                 name="password"
                 value={values.password}
                 onChange={onValueChange}
@@ -67,7 +69,7 @@ export const Login = () => {
                 <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button data-testId="submit" type="submit" className="btn btn-primary">Submit</button>
         </form>
     );
 }
