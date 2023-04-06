@@ -69,7 +69,7 @@ export const Login = () => {
                 <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
                     <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
-            <button data-testId="submit" type="submit" className="btn btn-primary">Submit</button>
+            <button data-testid="submit" type="submit" className="btn btn-primary">Submit</button>
         </form>
     );
 }

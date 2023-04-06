@@ -37,6 +37,7 @@ export const Register = () => {
                 <input
                     type="text"
                     className="form-control"
+                    placeholder='First name'
                     id="firstName"
                     name="firstName"
                     value={values.firstName}
@@ -53,6 +54,7 @@ export const Register = () => {
                 <input
                     type="text"
                     name="lastName"
+                    placeholder='Last name'
                     className="form-control"
                     id="lastName"
                     value={values.lastName}
@@ -70,6 +72,7 @@ export const Register = () => {
                     type="email"
                     className="form-control"
                     id="exampleInputEmail1"
+                    placeholder='Enter email'
                     name="email"
                     value={values.email}
                     onChange={onValueChange}
@@ -86,6 +89,7 @@ export const Register = () => {
                 type="password" 
                 className="form-control" 
                 id="exampleInputPassword1"
+                placeholder='Password'
                 name="password"
                 value={values.password}
                 onChange={onValueChange}
@@ -98,7 +102,7 @@ export const Register = () => {
                 <input type="checkbox" className="form-check-input" id="exampleCheck1" />
                 <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
             </div>
-            <button type="submit" className="btn btn-primary" disabled={Object.values(errors).some(er => er.isInvalid)}>Submit</button>
+            <button data-testid="submit" type="submit" className="btn btn-primary" disabled={Object.values(errors).some(er => er.isInvalid)}>Submit</button>
            
         </form>
        
