@@ -91,7 +91,7 @@ export const AttractionDetails = () => {
                         </li>}
                     {isAdmin  &&
                         <li className={`${styles['btn-edit']}`}>
-                            <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            <button data-testid="delete-button" type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Delete
             </button>
 
@@ -104,7 +104,7 @@ export const AttractionDetails = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-secondary" onClick={onDelete} data-bs-dismiss="modal">Delete</button>
+                            <button data-testid="delete-confirmation" type="button" className="btn btn-secondary" onClick={onDelete} data-bs-dismiss="modal">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ export const AttractionDetails = () => {
                     {error &&  <span className="text-danger">{error.message}</span>}
             </div>
             <div className={styles['picture-wrapper']}>
-                <img className={`${styles.picture}`} src={attraction.image} alt="attraction image" />
+                <img data-testid="attraction-image" className={`${styles.picture}`} src={attraction.image} alt="attraction-image" />
             </div>
         </section>
     );
