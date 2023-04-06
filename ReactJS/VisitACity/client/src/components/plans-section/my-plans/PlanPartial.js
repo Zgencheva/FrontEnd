@@ -1,8 +1,7 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { GetDateDiff } from "../../../helpers/getDateDiff.js";
 
-export const PlanPartial = ({ plan, onDelete }) => {
+export const PlanPartial = ({ plan }) => {
     let dateDiff = GetDateDiff(plan.fromDate, plan.toDate);
 
     return (

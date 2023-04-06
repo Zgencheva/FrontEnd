@@ -1,11 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import * as restaurantService from '../../../../services/restaurantService.js';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
 import { useForm } from '../../../../hooks/useForm.js';
 import { ValidateImage } from '../../../../helpers/validateImage.js';
+import { CountriesContext } from '../../../../contexts/CountriesContext.js';
 
-export const RestaurantCreate = ({ countries }) => {
+export const RestaurantCreate = () => {
+    const {countries} = useContext(
+        CountriesContext
+    );
     const navigate = useNavigate();
     const { values, onValueChange } = useForm({
         name: '',

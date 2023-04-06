@@ -1,10 +1,14 @@
-import { useState, useSyncExternalStore } from "react";
+import { useContext, useState, useSyncExternalStore } from "react";
 import { useNavigate } from "react-router-dom";
 import { executeAsync } from "../../../helpers/exceptions.js";
 import { useForm } from "../../../hooks/useForm.js";
 import * as countriesService from '../../../services/countriesService.js';
+import { CountriesContext } from "../../../contexts/CountriesContext.js";
 
-export const CityCreate = ({ countries }) => {
+export const CityCreate = () => {
+    const {countries} = useContext(
+        CountriesContext
+    );
     const { values, onValueChange } = useForm({
         country: '',
         city: '',

@@ -1,15 +1,17 @@
-import { useState, useSyncExternalStore } from "react";
-import { useNavigate } from "react-router-dom";
-import { executeAsync } from "../../../helpers/exceptions.js";
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "../../../hooks/useForm.js";
-import * as countriesService from '../../../services/countriesService.js';
+import { CountriesContext } from "../../../contexts/CountriesContext.js";
 
-export const CountryCreate = ({countries}) => {
-    const { values, onValueChange } = useForm({
-        country: '',
-    })
-    const [success, setSuccess] = useState(false);
-    const [serverError, setServerError] = useState(new Error());
+export const CountryCreate = () => {
+    const {onCountryCreate, success, setSuccess, serverError} = useContext(
+        CountriesContext
+    );
+    useEffect(()=> {
+        setSuccess(false)
+    },[])
+    const { values, onValueChange, onSubmit } = useForm({
+        country: ''
+    },onCountryCreate)
     const [errors, setError] = useState({});
     const validateInput = (e) => {
         setError(state => ({
@@ -20,19 +22,6 @@ export const CountryCreate = ({countries}) => {
             }
         }))
     }
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        const currentCountry = {
-            name: values.country,
-            cities: [],
-        }
-        const fetchData = async () => await countriesService.createCountry(currentCountry, countries);
-        const [res, err] = await executeAsync(fetchData);
-        if (err) {
-            return setServerError(err);
-        }
-        setSuccess(true);
-    }
     return (
         <section className="countryCreate">
                             {success && <div className="alert alert-primary" role="alert">
@@ -40,7 +29,7 @@ export const CountryCreate = ({countries}) => {
                 </div>}
             <div className="row">
                 <div className="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-                    <form onSubmit={submitHandler}>
+                    <form onSubmit={onSubmit}>
                         <div className="form-group">
                             <label className="form-label">Country</label>
                             <input

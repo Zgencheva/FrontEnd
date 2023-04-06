@@ -5,7 +5,8 @@ import * as restaurantService from '../../../../services/restaurantService.js';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
 import { ValidateImage } from '../../../../helpers/validateImage.js';
 
-export const RestaurantEdit = ({ countries }) => {
+export const RestaurantEdit = () => {
+
     const navigate = useNavigate();
     const { restaurantId } = useParams();
     const [restaurant, setRestaurant] = useState({});

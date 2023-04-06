@@ -31,6 +31,6 @@ export const addCity = async (values, countries) => {
     throw new Error(`There is a city with the same name in ${values.country}`)
   }
   country.cities.push(values.city);
-  const result = await requester(`${url}/${country._id}`, 'post', country, false, false);
+  const result = await requester(`${url}/${country._id}`, 'put', country, false, false);
   return result;
 }

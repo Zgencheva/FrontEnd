@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './CreatePlan.module.css';
 import { GetDate } from '../../../helpers/getDate.js';
@@ -6,10 +6,13 @@ import { routes } from '../../../constants/routes.js'
 import { useForm } from '../../../hooks/useForm.js';
 import * as planService from '../../../services/planService.js';
 import { executeAsync } from '../../../helpers/exceptions.js';
+import { CountriesContext } from '../../../contexts/CountriesContext.js';
 
-export const CreatePlan = ({ countries }) => {
-    console.log(countries);
-    const { values, onValueChange } = useForm({
+export const CreatePlan = () => {
+    const {countries} = useContext(
+        CountriesContext
+    );
+        const { values, onValueChange } = useForm({
         fromDate: GetDate(),
         toDate: GetDate(),
     })

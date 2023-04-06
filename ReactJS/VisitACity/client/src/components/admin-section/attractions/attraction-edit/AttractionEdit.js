@@ -1,12 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import * as attractionService from '../../../../services/attractionService.js';
 import styles from './AttractionEdit.module.css';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
 import { ValidateImage } from '../../../../helpers/validateImage.js';
 
-export const AttractionEdit = ({ countries }) => {
+export const AttractionEdit = () => {
+    
     const navigate = useNavigate();
     const { attractionId } = useParams();
     const [attraction, setAttraction] = useState({});

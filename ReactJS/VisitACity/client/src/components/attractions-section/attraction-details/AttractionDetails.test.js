@@ -67,7 +67,7 @@ describe('AttractionDetails component', () => {
     })
 
   it("render testAttraction when user is not Authenticated", async ()=> {
-       await act(async () => {
+      await act(async () => {
       render(<BrowserRouter>
         <AuthContext.Provider value={{ 
           user: testUser,

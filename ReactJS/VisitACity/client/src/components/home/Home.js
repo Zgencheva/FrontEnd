@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AttractionsList } from '../attractions-section/attractions-list/AttractionsList.js';
 import { RestaurantList } from '../restaurants-section/restaurant-list/RestaurantList.js';
@@ -8,11 +8,14 @@ import { Hero } from './hero/Hero.js';
 import * as attractionService from '../../services/attractionService.js';
 import * as citiesService from '../../services/citiesService.js';
 import * as restaurantService from '../../services/restaurantService.js';
+import { CountriesContext } from '../../contexts/CountriesContext.js';
 
 
 export const Home = () => {
     const navigate = useNavigate();
-
+    const {populateCountries} = useContext(
+        CountriesContext
+    );
     const { cityName, radioOption } = useParams();
     const [heroStatistics, setHeroStatistics] = useState({});
     const [attractions, setAttractions] = useState([]);
@@ -21,6 +24,7 @@ export const Home = () => {
     const [renderRestaurants, setRenderRestaurants] = useState([]);
 
     useEffect(() => {
+        populateCountries();
         attractionService.getAll()
             .then(attractions => {
                 setHeroStatistics(state => ({

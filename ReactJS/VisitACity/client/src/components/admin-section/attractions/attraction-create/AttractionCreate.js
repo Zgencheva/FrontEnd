@@ -1,12 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import * as attractionService from '../../../../services/attractionService.js';
 import styles from './AttractionCreate.module.css';
 import { saveImageToCloudinary } from '../../../../helpers/saveImageToClodinary.js';
 import { useForm } from '../../../../hooks/useForm.js';
 import { ValidateImage } from '../../../../helpers/validateImage.js';
+import { CountriesContext } from '../../../../contexts/CountriesContext.js';
 
-export const AttractionCreate = ({ countries }) => {
+export const AttractionCreate = () => {
+    const {countries} = useContext(
+        CountriesContext
+    );
     const navigate = useNavigate();
     const { values, onValueChange } = useForm({
         name: '',
