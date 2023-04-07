@@ -67,8 +67,6 @@ export const RestaurantDetails = () => {
        .then(res=> {console.log(res)
         setComments(state => [...state, res])});
     }
-    console.log(comments);
-    console.log(restaurant.rating);
     return (
         <section className="restaurant-details">
             <div className="card mb-3">
@@ -80,13 +78,13 @@ export const RestaurantDetails = () => {
                     <h3 className="card-title text-center">Address: {restaurant?.address}</h3>
                     <h3 className="card-text text-center">Phone: {restaurant?.phoneNumber}</h3>
                     <h3 className="card-text text-center">Visit official website <a target="_blank" href={restaurant?.restaurantUrl}>here</a></h3>
-                    <p className="card-text text-center">
+                    <div className="card-text text-center">
                         <div className="ratings text-center">
                             <div className="stars">
                                 {/* {getRatingContent(restaurant?.rating)} */}
                             </div>
                         </div>
-                    </p>
+                    </div>
                 </div>
             </div>
             <ul className={`${styles.btns}`}>
@@ -99,7 +97,7 @@ export const RestaurantDetails = () => {
                     </li>}
                 {isAdmin &&
                     <li className="btn-edit">
-                        <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <button data-testid="delete-button" type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             Delete
                         </button>
 
@@ -112,7 +110,7 @@ export const RestaurantDetails = () => {
                                     </div>
                                     <div className="modal-footer">
                                         <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" className="btn btn-secondary" onClick={onDelete} data-bs-dismiss="modal">Delete</button>
+                                        <button data-testid="delete-confirmation" type="button" className="btn btn-secondary" onClick={onDelete} data-bs-dismiss="modal">Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -130,13 +128,13 @@ export const RestaurantDetails = () => {
             <h2>Leave your comment here:</h2>
             <div asp-validation-summary="All" className="text-danger"></div>
             <div className="form-group">
-                <label asp-for="Rating"></label>
+                <label></label>
                 <div className={styles.rating}>
-                    <input type="radio" name="rating" value="1"/><label for="5">☆</label>
-                    <input type="radio" name="rating" value="2"/><label for="4">☆</label>
-                    <input type="radio" name="rating" value="3"/><label for="3">☆</label>
-                    <input type="radio" name="rating" value="4"/><label for="2">☆</label>
-                    <input type="radio" name="rating" value="5"/><label for="1">☆</label>
+                    <input type="radio" name="rating" value="1"/><label htmlFor="5">☆</label>
+                    <input type="radio" name="rating" value="2"/><label htmlFor="4">☆</label>
+                    <input type="radio" name="rating" value="3"/><label htmlFor="3">☆</label>
+                    <input type="radio" name="rating" value="4"/><label htmlFor="2">☆</label>
+                    <input type="radio" name="rating" value="5"/><label htmlFor="1">☆</label>
                 </div>
             </div>
             <div className="form-group">

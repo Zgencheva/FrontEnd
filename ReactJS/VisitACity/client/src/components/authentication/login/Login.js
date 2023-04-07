@@ -7,7 +7,10 @@ export const Login = () => {
     const {serverErrors, onUserLogin} = useContext(
         AuthContext
     );
-    const { values, onValueChange, onSubmit } = useForm({}, onUserLogin);
+    const { values, onValueChange, onSubmit } = useForm({
+        email: '',
+        password: ''}, 
+        onUserLogin);
     const [errors, setError] = useState({});
 
     const validateEmail = (e) => {

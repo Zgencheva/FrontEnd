@@ -7,7 +7,12 @@ export const Register = () => {
     const {serverErrors, onUserRegister} = useContext(
         AuthContext
     );
-    const { values, onValueChange, onSubmit } = useForm({}, onUserRegister);
+    const { values, onValueChange, onSubmit } = useForm({
+        email: '',
+        password: '',
+        firstName:'', 
+        lastName:''}, 
+        onUserRegister);
     const [errors, setError] = useState({});
 
     const validateEmail = (e) => {
