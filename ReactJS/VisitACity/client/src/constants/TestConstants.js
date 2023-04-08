@@ -82,7 +82,30 @@ export const testComment = {
     "restaurantId": "62cde487-6b82-468f-bdbf-fcfe2d7c779a",
     "userEmail": "visitacity@abv.bg",
 }
-
+export const testAttractions = [{
+    "_id": "62cde487-6b82-468f-bdbf-fcfe2d7c779b",
+    "name": "Dolphinarium",
+    "address": "Saltanat primorski park",
+    "attractionUrl": "https://dolphinariumvarna.bg/",
+    "type": "DayTours",
+    "price": 25,
+    "city": "Varna",
+    "country": "Bulgaria",
+    "image": "https://res.cloudinary.com/dllgr6ope/image/upload/v1678911306/62cde487-6b82-468f-bdbf-fcfe2d7c779b_vajldw.jpg",
+    "description": "Yes, you can swim with dolphins. Dolphins can have fun.",
+    "userReviews": []
+}]
+export const testRestaurants = [{
+    "_id": "62cde487-6b82-468f-bdbf-fcfe2d7c779a",
+    "name": "Raffy",
+    "phoneNumber": "055555555",
+    "address": "Nqkyde v Plovdiv i v Sofia",
+    "restaurantUrl": "https://raffy.bg/",
+    "city": "Sofia",
+    "country": "Bulgaria",
+    "image": "https://res.cloudinary.com/dllgr6ope/image/upload/v1679918510/xshq17zgkrmhbjtbl61z.jpg",
+    "comments": []
+}];
 export const testCountries = [{
     "_id": "1",
     "name": "Bulgaria",

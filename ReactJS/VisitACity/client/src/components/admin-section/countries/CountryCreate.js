@@ -33,6 +33,7 @@ export const CountryCreate = () => {
                         <div className="form-group">
                             <label className="form-label">Country</label>
                             <input
+                                data-testid="country-input"
                                 id="country"
                                 name="country"
                                 className="form-control"
@@ -44,7 +45,7 @@ export const CountryCreate = () => {
 
                         </div>
                         <div className="mb-3">
-                            <input className="btn btn-primary" type="submit" value="Add" />
+                            <input data-testid="add-country" disabled={Object.values(errors).some(er => er.isInvalid)} className="btn btn-primary" type="submit" value="Add" />
                         </div>
                     </form>
                     {serverError &&

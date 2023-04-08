@@ -6,7 +6,7 @@ import * as countriesService from '../../../services/countriesService.js';
 import { CountriesContext } from "../../../contexts/CountriesContext.js";
 
 export const CityCreate = () => {
-    const {countries} = useContext(
+    const { countries } = useContext(
         CountriesContext
     );
     const { values, onValueChange } = useForm({
@@ -37,15 +37,16 @@ export const CityCreate = () => {
     }
     return (
         <section className="cityCreate">
-                            {success && <div className="alert alert-primary" role="alert">
-                    City {values.city} added successfully!
-                </div>}
+            {success && <div className="alert alert-primary" role="alert">
+                City {values.city} added successfully!
+            </div>}
             <div className="row">
                 <div className="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
                     <form onSubmit={submitHandler}>
                         <div className="form-group">
                             <label className="form-label">Country</label>
                             <select
+                                data-testid="country-input"
                                 id="CountryList"
                                 name="country"
                                 className="form-control"
@@ -58,6 +59,7 @@ export const CityCreate = () => {
                         <div className="form-group">
                             <label className="form-label">City</label>
                             <input
+                                data-testid="city-input"
                                 id="CityList"
                                 name="city"
                                 className="form-control"
@@ -69,7 +71,7 @@ export const CityCreate = () => {
 
                         </div>
                         <div className="mb-3">
-                            <input className="btn btn-primary" type="submit" value="Add" />
+                            <input data-testid="city-create" disabled={Object.values(errors).some(er => er.isInvalid)} className="btn btn-primary" type="submit" value="Add" />
                         </div>
                     </form>
                     {serverError &&
