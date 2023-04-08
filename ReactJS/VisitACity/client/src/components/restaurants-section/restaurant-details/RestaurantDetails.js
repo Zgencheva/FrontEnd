@@ -12,6 +12,7 @@ import { CommentPartial } from "../../comments/comment-partial/CommentPartial.js
 export const RestaurantDetails = () => {
     const navigate = useNavigate();
     const { restaurantId } = useParams();
+    const [success, setSuccess] = useState(true);
     const { user, isAuthenticated, isAdmin } = useContext(AuthContext);
     const [restaurant, setRestaurant] = useState({});
     const [comments, setComments] = useState([]);
@@ -56,15 +57,19 @@ export const RestaurantDetails = () => {
     // };
     const onCommentSubmitHandler = async (e) => {
         e.preventDefault();
-        console.log('in form');
         let values = Object.fromEntries(new FormData(e.target));
+        if(!values.comment || !values.rating){
+            setSuccess(false);
+            return;
+        }
+        
         values = {
             ...values,
             restaurantId : restaurant._id,
             userEmail: user.email,
         }
        await commentService.create(values)
-       .then(res=> {console.log(res)
+       .then(res=> {
         setComments(state => [...state, res])});
     }
     return (
@@ -128,7 +133,6 @@ export const RestaurantDetails = () => {
             <h2>Leave your comment here:</h2>
             <div asp-validation-summary="All" className="text-danger"></div>
             <div className="form-group">
-                <label></label>
                 <div className={styles.rating}>
                     <input type="radio" name="rating" value="1"/><label htmlFor="5">☆</label>
                     <input type="radio" name="rating" value="2"/><label htmlFor="4">☆</label>
@@ -138,12 +142,13 @@ export const RestaurantDetails = () => {
                 </div>
             </div>
             <div className="form-group">
-                <label asp-for="Content"></label>
-                <textarea rows="6" cols="6" asp-for="Content" name="comment" className="form-control">
+                <textarea rows="6" cols="6"  name="comment" className="form-control">
                 </textarea>
-                <span asp-validation-for="Content" className="text-danger"></span>
+                {!success && 
+                <span className="text-danger">Please fill in your comment</span>
+            }
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button data-testid="submit-button" type="submit" className="btn btn-primary">Submit</button>
         </form>
             }
             

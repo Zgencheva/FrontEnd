@@ -13,7 +13,7 @@ export const Restaurant = ({ restaurant }) => {
     return (
         <div className={`media col-md-4 ${styles.card}`}>
             <Link to={`/restaurants/${restaurant._id}`}>
-                <img className="mr-3 img-responsive" width="100%" height="300" src={restaurant.image} alt="attraction image" />
+                <img data-testid='img' className="mr-3 img-responsive" width="100%" height="300" src={restaurant.image} alt="attraction image" />
             </Link>
             <div className={`card-body`}>
                 <h4 className="card-title text-center">{restaurant.name}</h4>

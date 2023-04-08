@@ -5,13 +5,14 @@ import { AuthContext } from '../../../contexts/AuthContext.js';
 import { act } from 'react-dom/test-utils';
 import { BrowserRouter } from 'react-router-dom';
 
-beforeEach(async () => {
-    await act(() => {
+beforeEach(async() => {
+    await act(async () => {
         render(<BrowserRouter>
             <AuthContext.Provider value={{
                 serverErrors: [],
                 onUserRegister: () => { return true },
-            }}><Register /></AuthContext.Provider>
+            }}><Register />
+            </AuthContext.Provider>
         </BrowserRouter>);
     });
 });
@@ -52,13 +53,13 @@ describe("Register component", () => {
     })
     it("should be able to submit form and regirect to home page", async () => {
 
-        const submitButton = screen.getByTestId("submit");
         const emailInputNode = screen.getByPlaceholderText("Enter email");
         const PasswordInputNode = screen.getByPlaceholderText("Password");
         userEvent.type(emailInputNode, "abv@abv.bg");
         userEvent.type(PasswordInputNode, "1234567");
-
-        userEvent.click(submitButton);
+        await act(async ()=> {
+            userEvent.click(await screen.findByTestId("submit"));
+        })
         expect(document.location.pathname).toMatch(`/`);
 
     })

@@ -60,5 +60,6 @@ export const testComment = {
     "_id": "62cde487-6b82-468f-bdbf-dfsfsdfsf",
     "_ownerId": "fsdfsdfsdfsdfsd",
     "comment": "bes place ever",
+    "restaurantId": "62cde487-6b82-468f-bdbf-fcfe2d7c779a",
     "userEmail": "visitacity@abv.bg",
 }

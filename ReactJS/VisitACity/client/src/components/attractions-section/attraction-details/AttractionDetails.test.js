@@ -79,7 +79,6 @@ describe('AttractionDetails component', () => {
     });
     expect(screen.queryByText("Edit")).toBeNull();
     expect(screen.queryByText("Delete")).toBeNull();
-
   })
 
   it("should render testAttraction when user is not Authenticated", async () => {
@@ -156,7 +155,9 @@ describe('AttractionDetails component', () => {
         </AuthContext.Provider>
       </BrowserRouter>);
     });
-    userEvent.click(screen.queryByText('Add to plan'));
+    await act(async()=> {
+      userEvent.click(await screen.findByText('Add to plan'));
+    })
     expect(document.location.pathname).toContain(`/login`);
   })
   it("AddToPlan button should call addAttractionToPlan in planService once", async () => {
@@ -172,7 +173,9 @@ describe('AttractionDetails component', () => {
         </AuthContext.Provider>
       </BrowserRouter>);
     });
-    userEvent.click(screen.queryByText('Add to plan'));
+    await act(async()=> {
+      userEvent.click(await screen.findByText('Add to plan'));
+    })
     expect(planService.addAttractionToPlan).toHaveBeenCalledTimes(1);
   })
   it("Edit button should regirect to Edit attraction page wneh user is Admin", async () => {
@@ -187,9 +190,9 @@ describe('AttractionDetails component', () => {
         </AuthContext.Provider>
       </BrowserRouter>);
     });
-
-    userEvent.click(screen.queryByText('Edit'));
-
+    await act(async ()=> {
+      userEvent.click(await screen.findByText('Edit'));
+    })
     expect(document.location.pathname).toContain(`/admin/attractions/edit/`);
   })
   it("Delete button should call attractionService.deleteAttraction once and should render modal button", async () => {
@@ -205,9 +208,10 @@ describe('AttractionDetails component', () => {
       </BrowserRouter>);
     });
 
-    userEvent.click(await screen.findByTestId('delete-button'));
-    userEvent.click(await screen.findByTestId('delete-confirmation'));
-
+    await act(async ()=> {
+      userEvent.click(await screen.findByTestId('delete-button'));
+      userEvent.click(await screen.findByTestId('delete-confirmation'));
+    })
     expect(document.location.pathname).toContain(`/`);
     expect(attractionService.deleteAttraction).toHaveBeenCalledTimes(1);
   })

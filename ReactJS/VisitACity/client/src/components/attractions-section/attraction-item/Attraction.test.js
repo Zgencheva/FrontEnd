@@ -48,7 +48,9 @@ describe('Attraction component', () => {
                 <Attraction attraction={testAttraction} />
             </BrowserRouter>);
           });
-        userEvent.click(screen.queryByText('Details'));
+          await act(async ()=> {
+            fireEvent.click(await screen.findByText('Details'));
+          })
         expect(document.location.pathname).toContain(`/attractions/${testAttraction._id}`);
     })
     it('should redirect to attraction details when user click on the image', async () => {
@@ -58,8 +60,9 @@ describe('Attraction component', () => {
                 <Attraction attraction={testAttraction} />
             </BrowserRouter>);
           });
-          const displayedImage = document.querySelector("img");
-        userEvent.click(displayedImage);
+          await act(async()=> {
+            fireEvent.click(await screen.findByTestId('img'));
+          })
         expect(document.location.pathname).toContain(`/attractions/${testAttraction._id}`);
     })
 })

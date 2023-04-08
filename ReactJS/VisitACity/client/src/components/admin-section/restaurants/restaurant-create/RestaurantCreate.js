@@ -29,8 +29,8 @@ export const RestaurantCreate = () => {
             comments: [],
         }
         if(ValidateImage(selectedImage) === true){
-            // data.image = await saveImageToCloudinary(selectedImage);
-            data.image = "https://res.cloudinary.com/dllgr6ope/image/upload/v1679918510/xshq17zgkrmhbjtbl61z.jpg"
+            data.image = await saveImageToCloudinary(selectedImage);
+            // data.image = "https://res.cloudinary.com/dllgr6ope/image/upload/v1679918510/xshq17zgkrmhbjtbl61z.jpg"
             await restaurantService.create(data)
             .then(res => navigate(`/restaurants/${res._id}`));
         }
