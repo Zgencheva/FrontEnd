@@ -8,9 +8,9 @@ export const PlanRestaurantsPartial = ({ restaurant, onRestaurantDelete }) => {
             <li className={`list-group-item d-flex justify-content-between align-items-start ${styles.plan}`}>
                 <div className={`ms-2 me-auto ${styles['plan-first']}`}>
                     <div className="fw-bold">{restaurant.name}</div>
-                    Visit the restaurant <Link to={`/restaurants/${restaurant._id}`}>here</Link>
+                    Visit the restaurant <Link data-testid="restaurant-visit" to={`/restaurants/${restaurant._id}`}>here</Link>
                 </div>
-                <div type="button" className="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target={`#${restaurant._id}`}>
+                <div data-testid="delete-restaurant" type="button" className="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target={`#${restaurant._id}`}>
                     <i className="fas fa-trash"></i>
                     Delete
                 </div>
@@ -23,7 +23,7 @@ export const PlanRestaurantsPartial = ({ restaurant, onRestaurantDelete }) => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-secondary" onClick={()=> onRestaurantDelete(restaurant._id)} data-bs-dismiss="modal">Delete</button>
+                                <button data-testid="delete-restaurant-confirmation" type="button" className="btn btn-secondary" onClick={()=> onRestaurantDelete(restaurant._id)} data-bs-dismiss="modal">Delete</button>
                             </div>
                         </div>
                     </div>

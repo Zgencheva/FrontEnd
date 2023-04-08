@@ -13,7 +13,6 @@ export const CountriesProvider = ({
     const [serverError, setServerError] = useState(new Error());
 
   const onCountryCreate = async (values) => {
-    console.log(values);
         const currentCountry = {
             name: values.country,
             cities: [],

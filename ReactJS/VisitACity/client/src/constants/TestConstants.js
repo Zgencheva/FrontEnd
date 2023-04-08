@@ -82,3 +82,32 @@ export const testComment = {
     "restaurantId": "62cde487-6b82-468f-bdbf-fcfe2d7c779a",
     "userEmail": "visitacity@abv.bg",
 }
+
+export const testCountries = [{
+    "_id": "1",
+    "name": "Bulgaria",
+    "cities": [
+        "Sofia",
+        "Plovdiv",
+        "Varna",
+        "Tryavna",
+        "Hisarya",
+        "Velingrad",
+        "Burgas"
+    ]
+},
+{
+    "_id": "2",
+    "name": "Croatia",
+    "cities": []
+}, {
+    "_id": "3",
+    "name": "USA",
+    "cities": []
+},{
+    "_id": "4",
+    "name": "Thailand",
+    "cities": [
+        "Patong"
+    ]
+}]

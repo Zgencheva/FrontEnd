@@ -80,6 +80,7 @@ return (
         <div className="form-group">
             <label className="form-label">Country</label>
             <select
+            data-testid="countries"
                 id="CountryList"
                 name="country"
                 className="form-control"
@@ -93,6 +94,7 @@ return (
         <div className="form-group">
             <label className="form-label">City</label>
             <select
+                data-testid="cities"
                 id="CityList"
                 name="city"
                 className="form-control"
@@ -105,6 +107,7 @@ return (
         <div className="form-group">
             <label className="form-label" htmlFor='fromDate'>From date</label>
             <input
+                data-testid="from-date"
                 type="date"
                 className="form-control"
                 id="fromDate"
@@ -120,6 +123,7 @@ return (
         <label className="form-label" htmlFor="toDate">To date</label>
         <div className="form-group">
             <input
+            data-testid="to-date"
                 id="toDate"
                 name="toDate"
                 type="date"

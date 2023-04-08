@@ -10,9 +10,9 @@ export const PlanAttractionsPartial = ({ attraction, onAttractionDelete }) => {
                     <div className="fw-bold">{attraction.name}</div>
                     {attraction.description}
                     <br />
-                    Visit the attraction <Link to={`/attractions/${attraction._id}`}>here</Link>
+                    Visit the attraction <Link data-testid="attraction-visit" to={`/attractions/${attraction._id}`}>here</Link>
                 </div>
-                <div type="button" className="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target={`#${attraction._id}`}>
+                <div data-testid="delete-attraction" type="button" className="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target={`#${attraction._id}`}>
                     <i className="fas fa-trash"></i>
                     Delete
                 </div>
@@ -25,7 +25,7 @@ export const PlanAttractionsPartial = ({ attraction, onAttractionDelete }) => {
                             </div>
                             <div className="modal-footer">
                                 <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" className="btn btn-secondary" onClick={()=> onAttractionDelete(attraction._id)} data-bs-dismiss="modal">Delete</button>
+                                <button data-testid="delete-attraction-confirmation" type="button" className="btn btn-secondary" onClick={()=> onAttractionDelete(attraction._id)} data-bs-dismiss="modal">Delete</button>
                             </div>
                         </div>
                     </div>

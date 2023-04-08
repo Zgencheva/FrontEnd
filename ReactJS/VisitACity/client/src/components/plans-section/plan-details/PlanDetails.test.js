@@ -58,6 +58,7 @@ describe("Plan details component", () => {
 
         await act(async () => {
             userEvent.click(await screen.findByTestId('delete'));
+            expect(screen.getByText(`Are you sure you want to delete your plan to ${testPlan.city}?`)).toBeInTheDocument();
             userEvent.click(await screen.findByTestId('delete-confirm'));
         })
         expect(document.location.pathname).toContain(`/myPlans`);
