@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor, cleanup, getByTestId, getByAltText } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import React, { useState as useStateMock } from 'react';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';

@@ -78,7 +78,9 @@ export const Home = () => {
         e.preventDefault();
 
         let values = Object.fromEntries(new FormData(e.target));
-        navigate(`/${values.cityName}/${values.radioOption}`);
+        if(values.cityName != ''){
+            navigate(`/${values.cityName}/${values.radioOption}`);
+        }
     }
 
     return (

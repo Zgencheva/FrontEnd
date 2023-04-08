@@ -53,7 +53,26 @@ export const testRestaurantWithComments = {
     "comments": []
 }
 export const testPlan = {
-    "_id": "62cde487-6b82-468f-bdbf-fcfe2d7c779rr",
+    "_ownerId": "5ff2179a-5d27-4061-bd3d-b2c830708cab",
+        "fromDate": "2023-04-08",
+        "toDate": "2023-04-09",
+        "country": "Bulgaria",
+        "city": "Sofia",
+        "attractions": ["62cde487-6b82-468f-bdbf-fcfe2d7c779b"],
+        "restaurants": ["62cde487-6b82-468f-bdbf-fcfe2d7c779a"],
+        "_createdOn": 1680943875473,
+        "_id": "9619c141-6b59-4802-9a3f-c887437387ca"
+}
+export const emptyTestPlan = {
+    "_ownerId": "5ff2179a-5d27-4061-bd3d-b2c830708cab",
+        "fromDate": "2023-04-08",
+        "toDate": "2023-04-09",
+        "country": "Bulgaria",
+        "city": "Sofia",
+        "attractions": [],
+        "restaurants": [],
+        "_createdOn": 1680943875473,
+        "_id": "9619c141-6b59-4802-9a3f-c887437387ca"
 }
 
 export const testComment = {

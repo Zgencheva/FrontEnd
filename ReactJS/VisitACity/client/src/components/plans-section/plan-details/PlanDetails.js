@@ -58,7 +58,7 @@ export const PlanDetails = () => {
             <ol>
                 {attractions?.map(attraction => <PlanAttractionsPartial key={attraction._id} attraction={attraction} onAttractionDelete={()=> onAttractionDelete(attraction._id)}/>)}
             </ol>
-            <p>See all attractions in {plan.city} <Link to={`/${plan.city}/attraction`}>here</Link></p>
+            <p>See all attractions in {plan.city} <Link data-testid="attractions-city" to={`/${plan.city}/attraction`}>here</Link></p>
             <h3>Restaurants:</h3>
             <hr />
             {plan.restaurants?.length == 0 &&
@@ -67,8 +67,8 @@ export const PlanDetails = () => {
                 <ol>
                 {restaurants?.map(restaurant => <PlanRestaurantsPartial key={restaurant._id} restaurant={restaurant} onRestaurantDelete={()=> onRestaurantDelete(restaurant._id)}/>)}
             </ol>
-            <p>See all restaurants in {plan.city} <Link to={`/${plan.city}/restaurant`}>here</Link></p>
-            <button type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <p>See all restaurants in {plan.city} <Link data-testid="restaurants-city" to={`/${plan.city}/restaurant`}>here</Link></p>
+            <button data-testid="delete" type="button" className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Delete plan
             </button>
 
@@ -81,7 +81,7 @@ export const PlanDetails = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-primary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-secondary" onClick={() => onDelete(plan._id)} data-bs-dismiss="modal">Delete</button>
+                            <button data-testid="delete-confirm" type="button" className="btn btn-secondary" onClick={() => onDelete(plan._id)} data-bs-dismiss="modal">Delete</button>
                         </div>
                     </div>
                 </div>
